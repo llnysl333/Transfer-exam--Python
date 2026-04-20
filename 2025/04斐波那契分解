@@ -1,0 +1,38 @@
+n = int(input())
+fib = [1,1]
+while fib[-1]<n:
+    fib.append(fib[-1]+fib[-2])
+result = []
+remain = n
+for i in range(len(fib)-1,-1,-1):
+    if fib[i]<=remain:
+        result.append(fib[i])
+        remain -= fib[i]
+    if remain == 0:
+        break
+print(f"{n}=",end="")
+for i in range(len(result)):
+    if i>0:
+        print("+",end="")
+    print(result[i],end="")
+#先生成不超过n的斐波那契数列
+#从后往前遍历斐波那契数列，每次尽量用最大的斐波那契数
+# 如果当前数不超过剩余的n，则将其加入结果，并从剩余的n中减去这个数
+#直到剩余的n为0，输出结果
+#思路框架：
+#n = int(input())
+#预处理一个数列fib = [1,1]
+#剩余数remain=n
+#while fib[-1]<n:只要最后一个数小于n继续生成下一项
+#    fib.append(fib[-1]+fib[-2])
+#result = []保存分解结果
+#remain = n表示剩余的数
+#for i in range(len(fib)-1,-1,-1):从后往前遍历斐波那契数列
+#    if fib[i]<=remain:找出之前创建的斐波那契列表中不超过剩余数
+#        result.append(fib[i])并将其加入结果
+#        remain -= fib[i]从剩余数中减去这个斐波那契数
+#    if remain == 0:如果剩余数为0，说明分解完成
+#for i in range(len(result)):逐个输出结果中的数
+#    if i>0:如果不是第一个数，输出加号
+#        print("+",end="")
+#    print(result[i],end="")再输出当前数

@@ -1,0 +1,15 @@
+def is_palindrome(x):
+    s = str(x)
+    return s == s[::-1]
+for x in range(10,1001):
+    if is_palindrome(x) and is_palindrome(x**2) and is_palindrome(x**3):
+        print(x)
+#先定义一个函数is_palindrome来判断一个数是否是回文数。
+# 然后在10到1000的范围内遍历每个数，检查它本身、它的平方和它的立方是否都是回文数。
+# 如果满足条件，就打印这个数。
+#思路框架：
+#def check(x):
+#...
+#for x in range(left,right+1):
+#    if check(x):
+#        print(x)

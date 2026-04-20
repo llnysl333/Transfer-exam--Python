@@ -1,0 +1,76 @@
+digits = "0123456789ABCDEF"
+num_str = input().split()
+base = int(input())
+precision = 10
+def convert_int_part(n,base):
+    if n == 0:
+        return "0"
+    res = []
+    while n > 0:
+        res.append(digits[n % base])
+        n //= base
+        res.reverse()
+        return "".join(res)
+def convert_frac_part(frac_str,base,precision):
+    if frac_str == "":
+        return ""
+    numerator = int(frac_str)
+    denominator = 10**len(frac_str)
+    res = []
+    for _ in range(precision):
+        if numerator == 0:
+            break
+        numerator *= base
+        res.append(digits[numerator//denominator])
+        numerator %= denominator
+    return "".join(res)
+if "." in num_str:
+    int_str,frac_str = num_str.split(".")
+else:
+    int_str = num_str
+    frac_str = ""
+int_part = int(int_str)
+int_res = convert_int_part(int_part,base)
+frac_res = convert_frac_part(frac_str,base,precision)
+if frac_res == "":
+    print(int_res)
+else:
+    print(int_res + "." + frac_res)
+# digits = "0123456789ABCDEF"定义数字字符表支持2-16进制转换
+# num_str = input().split()读入十进制浮点数字符串
+# base = int(input())读入目标进制
+# precision = 10设定小数部分最多保留10位防止无限循环
+# def convert_int_part(n,base):定义函数转换整数部分
+#     if n == 0:如果整数部分是0就直接返回字符串“0”
+#         return "0"
+#     res = []用列表保存每一位结果
+#     while n > 0:当n大于0时继续转换
+#         res.append(digits[n % base])取余得到当前最低位，并映射成字符
+#         n //= base把n更新
+#         res.reverse()整数部分除R倒取余，小数部分乘R顺取整
+#         return "".join(res)拼接成字符串返回
+# def convert_frac_part(frac_str,base,precision):定义函数转换小数部分
+#     if frac_str == "":如果没有小数就返回空字符串
+#         return ""
+#     numerator = int(frac_str)取小数部分的分子，例如0.625=625//1000
+#     denominator = 10**len(frac_str)小数部分的分母
+#     res = []保存转换后的小数位
+#     for _ in range(precision):最多生成precision位
+#         if numerator == 0:如果余数已为0则说明小数已转完
+#             break
+#         numerator *= base小数乘以进制
+#         res.append(digits[numerator//denominator])把当前位映射成字符加入到结果
+#         numerator %= denominator更新余数
+#     return "".join(res)返回小数部分字符串
+# if "." in num_str:如果输入里有小数点
+#     int_str,frac_str = num_str.split(".")分开整数部分和小数部分
+# else:否则就只有整数部分，小数部分为空
+#     int_str = num_str
+#     frac_str = ""
+# int_part = int(int_str)整数部分转成int
+# int_res = convert_int_part(int_part,base)转换进制
+# frac_part = convert_frac_part(frac_str,base,precision)转换小数部分
+# if frac_part == "":没有小数就只输出整数
+#     print(int_res)
+# else:
+#     print(int_res + "." + frac_res)输出"整数部分.小数部分"

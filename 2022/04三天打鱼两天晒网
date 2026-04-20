@@ -1,0 +1,13 @@
+from datetime import date
+start_year,start_month,start_day = map(int,input().split())
+target_year,target_month,target_day = map(int,input().split())
+start_date = date(start_year,start_month,start_day)
+target_date = date(target_year,target_month,target_day)
+days = (target_date - start_date).days
+position = days%5
+if position < 3:
+    print("打鱼")
+else:
+    print("晒网")
+#本质周期问题，一个完整周期长度是5天
+# 所以先求日期差，再看对应到周期里的第几天

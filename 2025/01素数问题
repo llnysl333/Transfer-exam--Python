@@ -1,0 +1,40 @@
+m,n = map(int,input().split())
+def is_prime(x):
+    if x < 2:
+        return False
+    for i in range(2,int(x**0.05+1)):
+        if x % i == 0:
+            return False
+    return True
+def check(x):
+    s = str(x)
+    if len(s)<3:
+        return False
+    a = int(s[-1])
+    b = int(s[-2])
+    c = int(s[-3])
+    return (a+b)%10 == c
+count = 0
+for x in range(n,m-1,-1):
+    if is_prime(x) and check(x):
+        print(x,end=" ")
+        count += 1
+        if count == 5:
+            print()
+            count = 0    
+#先写最基础的判素数函数
+# 再写一个函数来检查这个数的最后三位是否满足条件
+# 最后从m到n逆序遍历，找到满足条件的素数并输出，每行输出5个。
+#思路框架：
+#def is_prime(x):
+#...
+#def check(x):
+#...
+#count = 0
+#for x in range(n,m-1,-1):
+#    if is_prime(x) and check(x):
+#        print(x,end=" ")
+#        count += 1
+#        if count == 5:
+#            print()
+#            count = 0

@@ -1,0 +1,42 @@
+n,k = map(int,input().split())
+chocolates = []
+for _ in range(n):
+    h,w = map(int,input().split())
+    chocolates.append(h,w)
+def can_cut(side):
+    count = 0
+    for h,w in chocolates:
+        count += (h//side)*(w//side)
+        return count >= k
+left = 1
+right = max(max(h,w) for h,w in chocolates)
+ans = 1
+while left <= right:
+    mid = (left + right)//2
+    if can_cut(mid):
+        ans = mid
+        left = mid + 1
+    else:
+        right = mid - 1
+print(ans)
+#先读入巧克力数量n和需要分给的小朋友数量k
+#定义一个列表chocolates来存储每块巧克力的高度h和宽度w
+#定义一个函数can_cut(side)来判断是否可以切出边长为side的正方形巧克力块至少k块
+#在can_cut函数中，遍历每块巧克力，计算可以切出多少个边长为side的正方形块，并累加到count中
+#如果count大于等于k，说明可以切出足够的块，返回True，否则返回False
+#使用二分查找来找到最大的边长side，使得can_cut(side)为True
+#初始化left为1，right为所有巧克力的最大边长
+#在二分查找中，计算mid为left和right的中点，调用can_cut(mid)来判断是否可以切出边长为mid的块
+#如果mid可行就先记录并更新为左边界尝试更大的边长
+#如果mid不可行就更新为右边界并尝试更小的边长
+#思路框架：
+#def check(mid):
+#  统计mid是否可行
+#left,right = 最小值，最大值
+#while left <= right:
+#  mid = (left+right)//2
+#  if check(mid):
+#    ans = mid
+#    left = mid + 1
+#  else:
+#    right = mid - 1

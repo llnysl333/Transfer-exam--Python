@@ -1,0 +1,27 @@
+s = input().strip()
+n = int(input())
+parts = []
+for i in range(0,len(s),n):
+    parts.append(s[i:i+n])
+result = []
+for i in range(len(parts)):
+    part = parts[i]
+    move = i % len(part)
+    if move == 0:
+        result.append(part)
+    else:
+        new_part = part[len(part)-move:]+part[:len(part)-move]
+        result.append(new_part)
+print("".join(result))   
+#先将字符串按照长度n进行拆分
+#第i个部分需要移动i%n位
+#如果移动位数为0，则不变
+# 否则将字符串的后move位移到前面，前面部分移到后面
+#思路框架：
+#s = input().strip()
+#n = int(input())
+#parts = []
+#for i in range(0,parts[i]):
+#    k = i % n
+#新串 = 后k位 + 前面部分
+#拼接结果输出

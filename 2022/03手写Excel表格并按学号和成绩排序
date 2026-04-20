@@ -1,0 +1,48 @@
+#先按成绩降序再按学号升序
+n = int(input())
+students = []
+for _ in range(n):
+    student_id,name,score = input().split()
+    score = float(score)
+    students.append([student_id,name,score])
+students.sort(key=lambda x:(-x[2],x[0]))
+id_width = max(len("学号"),max(len(s[0]) for s in students))
+name_width = max(len("姓名"),max(len(s[1]) for s in students))
+score_width = max(len("成绩"),max(len(f"{s[2]:.2f}") for s in students))
+print(f"{'排名':<4}{'学号':<{id_width}}{'姓名':<{name_width}}{'成绩':>{score_width}}")
+print("-"*(10+id_width+name_width+score_width))
+for i in range(len(students)):
+    rank = i+1
+    student_id = students[i][0]
+    name = students[i][1]
+    score = students[i][2]
+    print(f"{rank:<4}{student_id:<{id_width}}{name:<{name_width}}{score:>{score_width}.2f}")
+#------------------------------------------------------------------------------------------
+#本质是二维数组的存储和排序
+#简单框架就是：
+#n = int(input())
+# data = []
+# for _ in range(n):
+#     ...
+#     data.append(...)
+# data.sort(key=lambda x: (...))
+# for row in data:
+#     print(...)
+# n = int(input())读入学生人数
+# students = []用列表保存所有学生记录
+# for _ in range(n):循环读入n条记录
+#     student_id,name,score = input().split()读入学号、姓名、成绩
+#     score = float(score)把成绩转换为浮点数方便比较排序
+#     students.append([student_id,name,score])把这条记录存入列表
+# students.sort(key=lambda x:(-x[2],x[0]))按成绩降序、学号升序排序
+# id_width = max(len("学号"),max(len(s[0]) for s in students))计算学号列宽
+# name_width = max(len("姓名"),max(len(s[1]) for s in students))计算姓名列宽
+# score_width = max(len("成绩"),max(len(f"{s[2]:.2f}") for s in students))计算成绩列宽
+# print(f"{'排名':<4}{'学号':<{id_width}}{'姓名':<{name_width}}{'成绩':>{score_width}}")输出表头
+# print("-"*(10+id_width+name_width+score_width))输出分割线
+# for i in range(len(students)):遍历排序后的学生列表
+#     rank = i+1计算排名
+#     student_id = students[i][0]取出学号
+#     name = students[i][1]取出姓名
+#     score = students[i][2]取出成绩
+# print(f"{rank:<4}{student_id:<{id_width}}{name:<{name_width}}{score:>{score_width}.2f}")格式化输出

@@ -1,0 +1,51 @@
+digits = "0123456789ABBCDEFGHIJKLMNOPQRSTUVWXYZ"
+l,r,a,b,k = map(int,input().split())
+def to_base(n,base):
+    if n == 0:
+        return "0"
+    res = []
+    while n > 0:
+        res.append(digits[n%base])
+        n //= base
+    res.reverse()
+    return "".join(res)
+def is_wave(s):
+    if len(s)<=1:
+        return True
+    if s[0] == s[1]:
+        return False
+    for i in range(2,len(s)):
+        if s[i] != s[i-2]:
+            return False
+    return True
+for x in range(a,b+1):
+    conut = 0
+    for base in range(l,r+1):
+        s = to_base(x,base)
+        if is_wave(s):
+            count += 1
+        if count == k:
+            print(x)
+#先写一个函数将数字转换为指定进制的字符串
+#再写一个函数检查字符串是否满足波浪数的条件
+#最后从a到b遍历每个数
+# 统计它在l到r的进制下满足条件的次数，如果k次则输出这个数
+#思路框架：
+#先定义一个字符串digits包含所有可能的数字和字母
+#再读入进制范围l和r，以及数的范围a和b，和需要满足条件的次数k
+#定义一个函数to_base(n,base)将数字n转换为base进制的字符串
+#def to_base(n,base):
+#    ...
+#定义一个函数检查字符串s是否满足波浪数的条件
+#def check(s):
+#    ...
+#从a到b遍历每个数x:for x in range(a,b+1):
+#    count = 0统计满足条件的次数
+#    从l到r遍历每个进制base:for base in range(l,r+1):
+#    if check(to_base(x,base)):如果这个数在这个进制下满足条件
+#        count += 1满足条件的次数加1
+#    if count == k:如果满足条件的次数等于k
+#        print(x)输出这个数
+
+
+

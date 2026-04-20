@@ -1,0 +1,33 @@
+L,R = map(int,input().split())
+def is_prime(n):
+    if n<2:
+        return False
+    i = 2
+    while i*i <= n:
+        if n % i == 0:
+            return False
+        i += 1
+    return True
+def is_pure_prime(n):
+    s = str(n)
+    for i in range(len(s)):
+        x = int(s[i:])
+        if not is_prime(x):
+            return False
+    return True
+ans = []
+for num in range(L,R+1):
+    if is_pure_prime(num):
+        ans.append(num)
+print(*ans)
+#先写一个基础函数判断素数
+#再把数字转成字符串，利用切片s[i:]实现去掉最高位
+#最后把每次截断最高位后的字符串转回整数判断是否素数
+#思路框架：
+#def is_prime(n):
+#...
+#def check(n):
+#...
+#for x in range(L,R+1):
+#  if check(x):
+#    print(x)

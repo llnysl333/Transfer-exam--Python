@@ -1,0 +1,37 @@
+v = int(input())
+n = 1
+while n*(n-1)//2 < v:
+    n += 1
+letters = []
+left = 1
+right = n
+remain = v
+while left < right:
+    can_make = right - left
+    if remain >= can_make:
+        letters.append(chr(ord('a')+right-1))
+        remain -= can_make
+        right -= 1
+    else:
+        letters.append(chr(ord('a')+left-1))
+        left += 1
+print("".join(letters))
+#------------------------------------------------------------
+# v = int(input())读入目标逆序对数
+# n = 1从长度1开始
+# while n*(n-1)//2 < v:找到最小可行长度n使得C(n,2)=n*(n-1)//2 > v 装得下目标逆序对数
+#     n += 1
+# letters = []保存结果字符对应的数字
+# left = 1当前最小数
+# right = n当前最大数
+# remain = v还需要的逆序对数
+# while left < right:只要还有数没放完就继续
+#     can_make = right - left放最大值是最多新增的逆序对数
+#     if remain >= can_make:如果还能承受这么多逆序对数
+#         letters.append(chr(ord('a')+right-1))放当前最大值对应的字母
+#         remain -= can_make扣掉制造的逆序对数
+#         right -= 1最大值用掉
+#     else:否则就放当前最小值对应的字母
+#         letters.append(chr(ord('a')+left-1))
+#         left += 1最小值用掉
+# print("".join(letters))

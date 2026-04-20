@@ -1,0 +1,45 @@
+def is_prime(x):
+    if x < 2:
+        return False
+    i = 2
+    while i*i <= x:
+        if x%i == 0:
+            return False
+        i += 1
+    return True
+d = 30
+while True:
+    found = False
+    for a in range(2,100000):
+        ok = True
+        for k in range(10):
+            current = a + k*d
+            if not is_prime(current):
+                ok = False
+                break
+        if ok:
+            print(d)
+            found = True
+            break
+    if found:
+        break
+    d += 30
+#先定义函数判断x是否为素数，小于2的肯定不是
+#从2开始试到sqrt(x)如果能整除就不是素数
+#最小公差从30开始因为除了2，3，5这些小素数外等差素数列还得避开偶数和5的倍数所以公差必须含这些因子
+#while True:不断尝试更大的公差
+    # found = False标记公差是否找到合法数列
+    # for a in range(2,100000):枚举起点，范围先取一个足够大的数
+    #     ok = True假设从a开始的这个数列合法
+    #     for k in range(10):检查长度为10的每一项
+    #         current = a + k*d当前项
+    #         if not is_prime(current):只要有一项不是素数
+    #             ok = False就标记为失败
+    #             break结束当前起点的检查
+    #     if ok:如果10项全是素数
+    #         print(d)输出最小公差
+    #         found = True标记已经找到答案
+    #         break结束起点枚举
+    # if found:如果已经找到就结束整个程序
+    #     break
+    # d += 30否则继续尝试下一个更大的公差

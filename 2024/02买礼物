@@ -1,0 +1,21 @@
+#法一
+prices = list(map(int,input().split()))
+n = len(prices)
+ans = n*(n-1)*(n-2)//6
+print(ans)
+#思路：
+# 先读入所有礼物价格并转成整数列表
+#礼物总数就是列表长度n
+# 再从n个价格中任意选取3个价格的组合数，即C(n,3) = n! / (3! * (n-3)!) = n*(n-1)*(n-2)/6
+#法二
+prices = list(map(int,input().split()))
+n = len(prices)
+count = 0
+for i in range(n):
+    for j in range(i+1,n):
+        for k in range(j+1,n):
+            count += 1
+print(count)
+#也可三层循环枚举
+#读入价格转成列表并统计总数
+#三层循环枚举所有不同的三个价格组合，统计买法数量

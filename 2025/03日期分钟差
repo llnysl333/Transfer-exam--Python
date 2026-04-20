@@ -1,0 +1,15 @@
+from datetime import datetime
+start = datetime(1921,7,23,12,0,0)
+end = datetime(2020,7,1,12,0,0)
+diff = end - start
+minutes = diff.days*24*60 +diff.seconds//60
+print(minutes)
+#先将起始时间和结束时间转换为datetime对象
+#计算两个时间的差值，得到一个timedelta对象
+#将差值转换为分钟，天数乘以24小时再乘以60分钟，加上秒数部分除以60
+#思路框架：
+#from datetime import datetime
+#start = datetime(...)
+#end = datetime(...)
+#diff = end - start
+#print(diff.days*24*60 + diff.seconds//60)
