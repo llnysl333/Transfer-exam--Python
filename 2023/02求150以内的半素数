@@ -1,0 +1,73 @@
+def is_h_number(x):
+    return x % 4 == 1
+def is_h_prime(x):
+    if x <= 1:
+        return False
+    if not is_h_number(x):
+        return False
+    i = 2
+    while i*i <= x:
+        if x%i == 0:
+            return False
+        i += 1
+    return True
+h_primes = []
+for num in range(1,150):
+    if is_h_prime(num):
+        h_primes.append(num)
+ans = []
+for i in range(len(h_primes)):
+    for j in range(i,len(h_primes)):
+        product = h_primes[i] * h_primes[j]
+        if product < 150:
+            ans.append((product,h_primes[i],h_primes[j]))
+        else:
+            break
+ans.sort()
+for item in ans:
+    print(f"{item[0]}={item[1]}*{item[2]}")
+#先理解H数：x % 4 == 1
+# 再在150以内找出所有H素数
+# 最后两层循环枚举两个H素数的乘积这里j从i开始既能包含平方又能避免重复组合
+# 只有乘积小于150的才是半素数
+# 思路框架：
+# def check_type(x):
+#   ...
+# def is_prime(s):
+#   ...
+# special_primes = []
+# for x in range:
+#   if check_type(x) and is_prime(s):
+#     special_primes.append(x)
+# for i inrange(len(special_primes)):
+#   for j in (i,len(special_primes)):
+#     处理 special_primes[i]*special_primes[j] 
+#-----------------------------------------------------------------
+# def is_h_number(x):定义函数判断是否是H数
+#     return x % 4 == 1
+# def is_h_prime(x):定义函数判断是否是H素数
+#     if x <= 1:小于等于1的数不是素数
+#         return False
+#     if not is_h_number(x):不是H数肯定不是H素数
+#         return False
+#     i = 2从2开始遍历
+#     while i*i <= x:检查到平方根sqrt(x)就行
+#         if x%i == 0:能整除就不是素数
+#             return False
+#         i += 1继续下一个因子
+#     return True没找到因子就说明是素数
+# h_primes = []创建一个列表存储150以内的H素数
+# for num in range(1,150):
+#     if is_h_prime(num):如果是H素数就加入列表
+#         h_prime.append(num)
+# ans = []在创建一个列表来存储所有H半素数
+# for i in range(len(h_primes)):
+#     for j in range(i,len(h_primes)):
+#         product = h_primes[i] * h_primes[j]计算乘积
+#         if product < 150:如果小于150就加入列表
+#             ans.append((product,h_primes[i],h_primes[j]))
+#         else:否则停止这层循环
+#             break
+# ans.sort()把乘积按从小到大排序
+# for item in ans:输出所有结果
+#     print(f"{item[0]}={item[1]}*{item[2]}")

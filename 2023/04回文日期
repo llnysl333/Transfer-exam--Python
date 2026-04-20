@@ -1,0 +1,21 @@
+from datetime import datetime,timedelta
+date_str = input().strip()
+current_date = datetime.strptime(date_str,"%Y%m%d")
+while True:
+    current_date += timedelta(days=1)
+    s = current_date.strftime("%Y%m%d")
+    if s == s[::-1]:
+        print(s)
+        break
+#先把输入日期变成真正的日期对象
+# 然后每天加1，检查新的日期字符串是否是回文
+# 只要找到第一个回文日期就停止
+# 思路框架：
+# from datetime import datetime,timedelta 
+# d = datetime.strptime(input(),"%Y%m%d")
+# while True:
+#   d += timedelta(days=1)
+#   s = d.strftime("%Y%m%d")
+#   if s == s[::-1]:
+#     print(s)
+#     break

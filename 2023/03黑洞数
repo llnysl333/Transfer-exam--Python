@@ -1,0 +1,25 @@
+n = input().strip()
+count = 0
+while True:
+    n = n.zfill(4)
+    max_num = int("".join(sorted(n,reverse=True)))
+    min_num = int("".join(sorted(n)))
+    diff = max_num - min_num
+    count += 1
+    if diff == 6174:
+        print(count)
+        break
+    n = str(diff)
+#----------------------------------------------------------
+# n = input().strip()读入4位数先按字符串处理更方便
+# count = 0记录操作次数
+# while True:一直循环直到进入6174
+#     n = n.zfill(4)必须补齐4位防止999-999=0这种变短
+#     max_num = int("".join(sorted(n,reverse=True)))把数字从大到小排序组成最大数
+#     min_num = int("".join(sorted(n)))把数字从小到大排序组成最小数
+#     diff = max_num - min_num计算差值
+#     count += 1操作次数加1
+#     if diff == 6174:如果到达黑洞数就输出次数并结束循环
+#         print(count)
+#         break
+#     n = str(diff)如没到达则把差值转换成字符串继续下一轮
