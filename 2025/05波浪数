@@ -1,4 +1,4 @@
-digits = "0123456789ABBCDEFGHIJKLMNOPQRSTUVWXYZ"
+digits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 l,r,a,b,k = map(int,input().split())
 def to_base(n,base):
     if n == 0:
