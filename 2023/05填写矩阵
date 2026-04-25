@@ -32,7 +32,7 @@ for layer in range((n//2)):
 #     value = layer + 1当前这层要填的数字如第0层填1
 #     for j in range(layer,size-layer):填上边，从左到右
 #         matrix[layer][j] = value把上边这一格设为当前层数字
-#     for j in range(layer,size-layer):填下边，从上到下
+#     for j in range(layer,size-layer):填下边，从左到右
 #         matrix[size-layer-1][j] = value把下边这一格设为当前层数字
 #     for i in range(layer,size-layer):填左边，从上到下
 #         matrix[i][layer] = value把左边这一格设为当前层数字
