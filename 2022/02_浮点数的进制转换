@@ -70,7 +70,7 @@ else:
 # int_part = int(int_str)整数部分转成int
 # int_res = convert_int_part(int_part,base)转换进制
 # frac_res = convert_frac_part(frac_str,base,precision)转换小数部分
-# if frac_part == "":没有小数就只输出整数
+# if frac_res == "":没有小数就只输出整数
 #     print(int_res)
 # else:
 #     print(int_res + "." + frac_res)输出"整数部分.小数部分"
