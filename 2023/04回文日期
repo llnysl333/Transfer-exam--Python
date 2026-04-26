@@ -19,3 +19,6 @@ while True:
 #   if s == s[::-1]:
 #     print(s)
 #     break
+#from datetime import datetime，timedelta从datetime模块中导入datetime类（日期加时间）和timedelta类（时间差）
+#strptime=string parse time：把字符串按照你指定的格式解析成datetime对象
+#strftime=string format time:把datetime对象按照你给的格式转换成字符串
