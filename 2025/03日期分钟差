@@ -12,4 +12,7 @@ print(minutes)
 #start = datetime(...)
 #end = datetime(...)
 #diff = end - start
+#diff自动返回timedelta对象，至于为什么没显式导入timedelta是因为减法运算本身是datetime的方法且没有直接使用timedelta类名（timedelta(days=1)）和类型注解
+#什么时候需要导入timedelta:直接创建一个时间差对象：delta=timedelta(days=1)或者在类型注释中写明：def foo(delta:timedelta)
 #print(diff.days*24*60 + diff.seconds//60)
+#只加days和seconds是因为timedelta中只有days,seconds,microseconds
