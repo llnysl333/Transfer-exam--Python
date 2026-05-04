@@ -13,3 +13,17 @@ print(bin(ans)[2:].zfill(16))
 # n = int(input())读入一个整数n
 # ans = n & 0xFFFF只保留n的低16位正好对应16位补码
 # print(bin(ans)[2:].zfill(16))转成2进制字符串，去除前缀0b,并补齐16位
+#法二：
+n = int(input())
+if n >= 0:
+    n = bin(n)[2:].zfill(16)
+else:
+    n = abs(n)
+    n = list(bin(n)[2:].zfill(15))
+    for i in range(len(n)):
+        if n[i] == '0':
+            n[i] = '1'
+        else:
+            n[i] = '0'
+    ans = int('1'+''.join(n),2)+1
+    print(bin(ans)[2:])

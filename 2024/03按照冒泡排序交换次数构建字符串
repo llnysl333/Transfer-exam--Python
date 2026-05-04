@@ -15,6 +15,7 @@ while left < right:
     else:
         letters.append(chr(ord('a')+left-1))
         left += 1
+        letters.append(chr(ord('a')+left-1))
 print("".join(letters))
 #------------------------------------------------------------
 # v = int(input())读入目标逆序对数
