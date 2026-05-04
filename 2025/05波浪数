@@ -24,7 +24,7 @@ for x in range(a,b+1):
         s = to_base(x,base)
         if is_wave(s):
             count += 1
-        if count == k:
+    if count == k:
             print(x)
 #先写一个函数将数字转换为指定进制的字符串
 #再写一个函数检查字符串是否满足波浪数的条件

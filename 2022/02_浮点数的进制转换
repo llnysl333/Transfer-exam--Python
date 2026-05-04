@@ -9,8 +9,8 @@ def convert_int_part(n,base):
     while n > 0:
         res.append(digits[n % base])
         n //= base
-        res.reverse()
-        return "".join(res)
+    res.reverse()
+    return "".join(res)
 def convert_frac_part(frac_str,base,precision):
     if frac_str == "":
         return ""

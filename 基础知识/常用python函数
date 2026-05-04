@@ -1,0 +1,181 @@
+from math import sqrt
+from datetime import date,datetime,timedelta
+from collections import Counter
+from itertools import combinations,permutations,product
+import random
+#数学与数字
+print(abs(-7))#-7的绝对值:7
+print(pow(2,10))#2的10次方:1024
+print(pow(2,10,100))#2^10%100=24
+print(round(3.14159,2))#3.14
+print(round(2.5))#python的.5一般取相近的偶数:2
+print(round(3.5))#4
+print(max(1,5,3))#5
+print(min([4,2,9]))#2
+words = ["hi","apple","banana"]
+print(max(words,key=len))#banana
+nums=[1,2,3,4]
+print(sum(nums))#10
+print(sqrt(16))#sqrt平方根来自math库：4 如果不用库的话就用n**0.5
+#字符、编码、格式化、进制
+print(ord("A"))#字符转编码:65
+print(chr(97))#编码转字符:a
+ch="c"
+print(ord(ch)-ord("a")+1)#求字母序号:a->1,b->2,c->3
+print(format(3.14159,".2f"))#3.14
+print(format(10,"b"))#1010,2进制;如果8进制就用o;16进制就用x
+x = int(input().strip(),2)#按照2进制解析传入的字符串并转成10进制方便我们运算，例如int("1101",2)>>>13,int默认使用10进制
+print(bin(x)[2:])#输出又转回2进制并去掉前面的0b
+#其他进制：
+x = int(input().strip(),8)#8进制转10进制
+print(oct(x)[2:])#转回8进制并去除前面的0o
+x = int(input().strip(),16)#16进制转10进制
+print(hex(x)[2:])#转回16进制并去除前面的0x
+n = int(input())#读入一个整数n
+ans = n & 0xFFFF#只保留n的低16位正好对应16位补码
+print(bin(ans)[2:].zfill(16))#转成2进制字符串，去除前缀0b,并补齐16位
+x=3.14159
+print(f"{x:.2f}")#f-string更常用：3.14
+#长度、范围、枚举
+print(len("hello"))#5
+print(len[1,2,3])#3
+print(len({"a":1,"b":2}))#2
+print(list(range(1,10,2)))#[1,3,5,7,9]
+print(list(range(5,0,-1)))#[5,4,3,2,1]
+arr=["a","b","c"]
+for i,x in enumerate(arr):
+    print(i,x)
+#同时获得下标和值
+# 0 a
+# 1 b
+# 2 c
+for i,x in enumerate(arr,start=1):
+    print(i,x)
+#也可以改变起始编号
+# 1 a
+# 2 b
+# 3 c
+#排序
+arr=[3,1,2]
+print(sorted(arr))#[1,2,3]返回新列表不改变原列表
+print(arr)#[3,1,2]
+arr.sort()#改变原列表
+print(arr)#[1,2,3]
+arr.sort(reverse=True)
+print(arr)#倒序[3,2,1]
+students=[("tom",80),("jack",90),("bob",80),("alice",90)]
+students.sort(key=lambda x: (-x[1],x[0]))#成绩降序，成绩相同则姓名升序
+#字符串方法
+print("Tom 80".split())#split()默认按照空白字符拆:['Tom','80']
+print("1,2,3".split(","))#指定分隔符['1','2','3']
+print("".join(["a","b","c"]))#join把字符串序列拼接成字符串abc
+print("".join(["a","b","c"]))#a-b-c指定分隔符
+print(" ".join(map(str,[1,2,3])))#1 2 3#join只能拼接字符串，数字列表需要先转成字符串
+print("   hello   ".strip())#去除两边空白
+print("---abc---".strip("-"))#去除指定字符
+print("HELLO".lower())#hello小写
+print("HELLO".upper())#HELLO大写
+print("HELLO".capitalize())#Hello首字母大写
+print("HELLO world".title())#Hello World每个单词首字母大写
+print("banana".count("a"))#统计出现次数3
+print([1,2,3,4,2].count(2))#2
+print("hello".index("e"))#1找第一次出现位置，找不到会报错
+print("hello".find("x"))#-1字符串方法，找不到返回-1
+print("abc"[::-1])#字符串反转cba
+#列表方法
+arr=[1,2]
+print(arr.append(3))#插入末尾#[1,2,3]
+arr=[1,2]
+arr.append([3,4])
+print(arr)#[1,2,[3,4]]
+arr=[1,2]
+arr.extend([3,4])#把可迭代对象逐个加入#[1,2,3,4]
+arr=[1,2,3,2]
+arr.remove(2)#按值删除第一个x,找不到会报错
+print(arr)#[1,3,2]
+arr=[1,2,3]
+arr.pop()#删除最后一个
+print(arr)#[1,2]
+arr=[1,2,3]
+arr.pop(1)#删除指定下标对应的元素
+print(arr)#[1,3]
+arr=[1,2,3]
+print(arr.reverse())#原地反转#[3,2,1]
+arr=[1,2,3]
+print(list(reversed(arr)))#[3,2,1]返回反向迭代器，不改变原对象
+print(arr)#[1,2,3]
+matrix=[[0]*n for _ in range(n)]#创建2维n行n列的矩阵
+arr=[1,2,3]
+print(arr.clear())#[]#清空
+#集合方法
+print(set([1,2,2,3]))#创建集合，自动去重#{1，2，3}
+s=set()#空集合创建用set()
+s.add(1)#添加元素
+s.add(2)
+print(s)#{1,2}
+s.discard(999)#删除元素元素不存在不会报错
+#s.remove(999)也是删除元素，但元素不存在会报错
+nums=[1,2,3,3]#判断是否有重复
+seen=set()
+for i in nums:
+    if i in seen:
+        print("发现重复：",i)
+        break
+    seen.add(i)
+#字典方法
+d={"Tom":80,"Jack":90}
+print(list(d.keys()))#[Tom,Jack]所有键
+print(list(d.values()))#[80,90]所有值
+print(list(d.items()))#所有键值对
+for name,score in d.items():
+    print(name,score)
+#Tom 80
+#Jack 90
+print(d.get("Tom"))#80#取值.不存在返回None,或者设定返回报错:get(key,defult)如print(d.get("Alice",o))返回的是0
+#统计次数
+s="banana"
+cnt={}
+for ch in s:
+    cnt[ch]=cnt.get(ch,0)+1
+print(cnt)
+#判断所有字符出现次数是否相同
+cnt2=Counter("222111")
+print(len(set(cnt2.values()))==1)
+#map把函数作用到每个元素
+arr=["1","2","3"]
+nums=list(map(int,arr))#把字符串列表转成整数列表
+print(nums)#[1,2,3]
+nums=[1,2,3,4,5]
+#filter筛选符合条件的元素
+evens=list(filter(lambda x: x%2 == 0,nums))
+print(evens)#[2,4]
+#lambda匿名函数不用def
+f = lambda x: x+1
+print(f(3))#4
+#random库中常用函数
+print(random.random())#输出[0,1)随机小数
+print(random.randint(1,6))#输出[1,6]随机整数包括两端
+print(random.choice(["A","B","C"]))#随机在列表中选一个
+#datetime库中常用函数
+d=date(2026,5,3)#date只有年月日
+print(d.year,d.month,d.day)#2026 5 3
+dt=datetime(2026,5,3,10,30,45)#datetime有年月日和时分秒
+print(dt.hour,dt.minute,dt.seconds)#10 30 45
+dt2=datetime.strptime("20260503","%Y%m%d")#字符串->datetime对象
+dt2=datetime.strptime("20260503","%Y%m%d").date()#只要日期
+d.strftime("%Y%m%d")#datetime对象->字符串
+#枚举日期模板
+start = date(2026,5,1)
+end = date(2026,5,3)
+cur = start
+while cur <= end:
+    print(cur)
+    cur += timedelta(days=1)
+# 2026-05-01会自动补充前导0，因为打印的是整个date对象，默认按照ISO日期格式（YY-MM-DD）输出，或者print(cur.year,cur.month,cur.day)就不会补0
+# 2026-05-02
+# 2026-05-03
+#itertools库中常用函数
+for item in combinations(range(1,5),3):
+    print(item)#从1-4中选3个组合，不考虑顺序(1,2,3)(1,2,4)(1,3,4)(2,3,4)
+for item in permutations([1,2,3],2):
+    print(item)#从列表中选两个进行排列(1,2)(2,1)(1,3)(3,1)(2,3)(3,2)
