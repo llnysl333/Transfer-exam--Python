@@ -1,0 +1,149 @@
+#01
+L,R = map(int,input().split())
+def is_prime(x):
+    if x<2:
+        return False
+    for i in range(2,int(x**0.5)+1):
+        if x % i == 0:
+            return False
+    return True
+def is_pureprime(x):
+    if not is_prime(x):
+        return False
+    s=str(x)
+    for i in range(len(s)):
+        x=s[i:]#x = int(s[i:])
+        if is_prime(x):#if not is_prime(x)
+            return False
+    return True
+for i in range(L,R+1):
+    if is_pureprime(i):
+        print(i)
+#------------------------------------------------
+
+
+
+#02
+x,base = map(int,input().split())#读入的是十进制浮点数
+#x = input.split()
+#base=int(input())
+digits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+def convert_int(x,n):
+    if x==0:
+        return "0"
+    res=[]
+    while x>0:
+        res.append(digits[x%n])
+        x //= n
+    return "".join(res[::-1])
+#---------------------------------------------------------------
+def convert_little(x,n):
+    if x == 0:
+        return "0"
+    res=[]
+    while x>0:
+        res.append(int(x))
+        x *= n
+        x -= int(x)
+    return "".join(res)
+#-------------------------修改------------------------------------
+# def convert_little(x,n,precision=8):
+#     if x == "":
+#         return ""
+#     numerator = int(x)
+#     demoninator = 10*len(x)
+#     res=[]
+#     for _ in range(precision):
+#         if numerator == 0:
+#             break
+#         numerator *= base
+#         res.append(digits[numerator//demoninator])
+#         numerator %= demoninator
+#         return "".join(res)
+#----------------------------------------------------------------
+x=str(x)#一直就是字符串
+if ".".find(x):#if "." in x:
+    int1,little1 = map(x.split("."))#直接切就行int1,little1 = x.split(".")
+#else:
+#    int1 = x
+#    little1 = ""
+intpart = convert_int(int1,base)#intpart = convert_int(int(int1),base)
+littlepart = convert_little(little1,base)
+#if little1 = "":
+#    print(intpart)
+#else:
+#    print(intpart+"."+littlepart)
+print(intpart + littlepart)
+#---------------------------------------------------------
+
+
+
+#03
+n = int(input())
+students=[]
+for _ in range(n):
+    name,number,score = map(str,input().split())
+    number,score = float(number,score)
+    students.append((name,number,score))
+students.sort(lambda x : (-x[2],x[1]))#students.sort(key=lambda x :(-x[2],x[1]))
+for i in range(len(students)):
+    print(students[i])
+#--------------------------------------------------------------
+
+
+
+#04
+from datetime import date,timedelta
+#----------------------------------------------------
+start,end = map(str,input().split())
+start = date.strptime(start,"%Y%m%d")
+end = date.strptime(end,"%Y%m%d")
+#---------------------修改--------------------------------
+# start_year,start_month,start_day = map(int,input().split())
+# end_year,end_month,end_day = map(int,input().split())
+# start = date(start_year,start_month,start_day)
+# end = date(end_year,end_month,end_day)
+#-----------------------------------------------------------
+diff = end-start#diff = (end-start).days
+if 0 < diff%5 <=3:#if diff%5 <3:因为不包括第一天
+    print("打鱼")
+else:
+    print("晒网")
+#------------------------------------------------------------
+
+
+
+#05
+m,n = map(int,input().split())
+#-------------------------------------------
+matrix=[[0]*n for _ in range(m)]
+for i in range(m):
+    for j in range(n):
+        matrix[i][j] = input()
+#--------------修改----------------------------
+# matrix = []
+# for _ in range(m):
+#     row = list(map(int,input().split()))
+#     matrix.append(row)
+#----------------------------------------------
+left = 0
+right = n-1
+top = 0
+bottom = m-1
+res=[]
+while left<=right and top<=bottom:
+    for a in range(left,right+1):
+        res.append(matrix[top][a])
+    top+=1
+    for b in range(top,bottom+1):
+        res.append(matrix[b][right])
+    right-=1
+    if top<=bottom:
+        for c in range(right,left-1,-1):
+            res.append(matrix[bottom][c])
+        bottom-=1
+    if left<=right:
+        for d in range(bottom,top-1,-1):
+            res.append(matrix[d][left])
+        left+=1
+print(*res)

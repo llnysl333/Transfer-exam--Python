@@ -15,11 +15,10 @@ def is_pure_prime(n):
         if not is_prime(x):
             return False
     return True
-ans = []
 for num in range(L,R+1):
     if is_pure_prime(num):
-        ans.append(num)
-print(*ans)
+        print(num)
+
 #先写一个基础函数判断素数
 #再把数字转成字符串，利用切片s[i:]实现去掉最高位
 #最后把每次截断最高位后的字符串转回整数判断是否素数

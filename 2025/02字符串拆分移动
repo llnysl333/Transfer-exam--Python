@@ -10,7 +10,7 @@ for i in range(len(parts)):
     if move == 0:
         result.append(part)
     else:
-        new_part = part[len(part)-move:]+part[:len(part)-move]
+        new_part = part[-move:]+part[:-move]
         result.append(new_part)
 print("".join(result))   
 #先将字符串按照长度n进行拆分

@@ -1,0 +1,134 @@
+#01
+def is_palindrome(x):
+    s = str(x)
+    return s == s[::-1]
+for i in range(10,1001):
+    if is_palindrome(i) and is_palindrome(i*i) and is_palindrome(i**3):
+        print(i)
+#-------------------------------------
+
+
+
+#02
+#-------------------------------------
+x = map(int,input().split())
+n = int(input())
+#--------------修改------------------
+#n是自己求的
+#x = list(map(int,input().split()))
+#n = len(x)
+count = n*(n-1)*(n-2)//6
+print(count)
+#------------------------------------
+
+
+
+#03
+v = int(input())
+n=0
+while n*(n-1)/2 < v:
+    n+=1
+s=[]
+#-----------------------------------------
+for i in range(n,0,-1):
+    while v>0:
+        s.append(chr(ord('a')+n-1))
+        v -= i
+#----------------修改-------------------------
+left = 1
+right = n
+remain = v
+while left < right:
+    can_make_num = right-left
+    if remain >= can_make_num:
+        s.append(chr(ord('a')+right-1))
+        remain -= can_make_num 
+        right -= 1   
+    else:
+        s.append(chr(ord('a')+left-1))
+        left += 1
+        s.append(chr(ord('a')+left-1))
+print("".join(s))
+#---------------------------------------------
+
+
+
+#04
+n,k = map(int,input().split())
+s=[]
+for i in range(n):
+    Hi,Wi = input().split()#Hi,Wi = map(int,input().split())
+    s.append((Hi,Wi))
+ans = 1
+left = 1
+right = max(max(Hi,Wi) for Hi,Wi in s)# right = max(max(Hi,Wi) for Hi,Wi in s)
+#------------------------------------
+def is_cut(x):
+    H,W = Hi,Wi
+    if (H//x) * (W//x) >= k:
+        return True
+    return False
+#--------------修改----------------------
+# def is_cut(x):
+#     count = 0
+#     for Hi,Wi in s:
+#         count += (Hi//x)*(Wi//x)
+#     return count >= k
+#----------------------------------------
+while left <= right:
+    mid = (left+right)//2
+    for i in len(s):
+        while True:
+            if is_cut(mid):
+                left = mid+1
+                res = mid
+            else:
+                right = mid-1
+#---------------修改------------------------
+# while left <= right:
+#     mid = (left+right)//2
+#     if is_cut(mid):
+#         left = mid+1
+#         ans=mid
+#     else:
+#         right = mid-1
+# print(ans)
+# #---------------------------------------
+
+
+
+#05
+def is_prime(x):
+    if x < 2:
+        return False
+    for i in range(2,int(x**0.5)+1):
+        if x % i == 0:
+            return False
+    return True
+d = 30
+#-----------------------------------------------
+found = False
+while not found:
+    for num1 in range(2,10000):
+        for i in range(10):
+            if not is_prime(num1+i*d):
+                break
+        found=True
+        print(d)
+#-------------------修改-----------------------------
+#for...else结构
+# for ...:
+#   if失败:
+#     break
+# else:#如果整个for循环没有出现break
+#   ...
+#----------------------------------------
+# while True:
+#     for num1 in range(2,10000):
+#         for i in range(10):
+#             if not is_prime(num+i*d):
+#                 break
+#         else:
+#             print(d)
+#             exit()
+#     d += 30

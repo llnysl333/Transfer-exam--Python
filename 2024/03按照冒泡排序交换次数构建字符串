@@ -18,6 +18,7 @@ while left < right:
         letters.append(chr(ord('a')+left-1))
 print("".join(letters))
 #------------------------------------------------------------
+#该题解不考虑重复元素
 # v = int(input())读入目标逆序对数
 # n = 1从长度1开始
 # while n*(n-1)//2 < v:找到最小可行长度n使得C(n,2)=n*(n-1)//2 > v 装得下目标逆序对数

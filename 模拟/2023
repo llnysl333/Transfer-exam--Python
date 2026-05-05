@@ -1,0 +1,136 @@
+#01
+n = int(input())
+if n>=0:
+    res = bin(n)[2:].zfill(16)
+    print(res)
+else:
+    n = abs(n)
+#---------------------------------------
+    res = str(bin(n)[2:].zfill(15))
+    for ch in res:
+        if ch=="1":
+            ch = 0
+        else:
+            ch = 1
+    res = int(res) + 1
+    res = bin(res)[2:].zfill(15)
+    print("1"+str(res))
+#------------------修改----------------------
+    n = list(bin(n)[2:].zfill(15))
+    for i in range(len(n)):
+        if n[i] == '0':
+            n[i] = '1'
+        else:
+            n[i] = '0'
+    res = int('1'+''.join(n),2)+1
+    print(bin(res)[2:])
+#ch只是临时变量，无法修改res
+#-------------------------------------------
+
+
+
+#02
+def is_prime(x):
+    if x<2:
+        return False
+    for i in range(2,int(x**0.5)+1):
+        if x%i == 0:
+            return False
+    return True
+def H_prime(x):
+    if x%4 != 1:
+        return False
+    if not is_prime(x):
+        return False
+    return True
+res=[]
+for i in range(2,151):
+    for j in range(2,151//2):#for j in range(i,151//2):从i开始能去重
+        if H_prime(i) and H_prime(j) and i*j<=150:
+            res.append(i*j)
+#需要排序res.sort()
+for i in range(len(res)):
+    print(i)#print(res[i])
+#----------------------------------------------------
+
+
+
+#03
+n=int(input())#n=input().strip()
+s = str(n)
+count = 0
+while n != 6174:
+    big = "".join(s,reverse=True)#big=int("".join(sorted(s,reverse=True)))
+    small = "".join(s)#small=int("".join(s))
+#-----------------------------------------------------------
+    n = (big-small).zfill(4)
+    count += 1
+    s=str(n)
+print(count)
+#-----------------------修改-------------------------------
+#     n = big-small
+#     s=str(n).zfill(4)
+#     count+=1
+# print(count)
+#---------------------------------------------------
+
+
+
+
+#04
+from datetime import datetime,timedelta
+start = int(input())#没有整数转日期对象是字符串转日期对象
+#start = input().strip()
+start = datetime(start,"%Y%m%d")#start = datetime.striptime(start,"%Y%m%d")
+#----------------------------------------------------
+delta = timedelta(days=1)
+def is_palindrome(x):
+    s = str()
+    return s == s[::-1]
+d = start.strftime("%Y%m%d")
+while True:
+    if is_palindrome(d):
+        print(d)
+        break
+    else:
+        d = datetime.strptime(d,"%Y%m%d")
+        d += delta
+#-----------------------修改--------------------------------
+while True:
+    d += timedelta(days=1)
+    s = d.strftime("%Y%m%d")
+    if s == s[::-1]:
+        print(s)
+        break
+#可以引入s就不用重复转换d了
+#------------------------------------------------------------
+
+
+
+
+#05
+n = int(input())
+matrix = [[0]*(n-1) for _ in range(n-1)]
+left = 0
+right = n-2
+top = 0
+bottom = n-2
+values = 1
+while left<=right and top<=bottom:
+    for a in range(left,right+1):
+        matrix[top][a] = values
+    top += 1
+    for b in range(top,bottom+1):
+        matrix[b][right] = values
+    right -= 1
+    if top<=bottom:
+        for c in range(right,left-1,-1):
+            matrix[bottom][c] = values
+        bottom -= 1
+    if left<=right:
+        for d in range(bottom,top-1,-1):
+            matrix[d][left] = values
+        left += 1
+#   values += 1
+#for row in matrix:
+#    print(*row)

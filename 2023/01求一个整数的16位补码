@@ -17,6 +17,7 @@ print(bin(ans)[2:].zfill(16))
 n = int(input())
 if n >= 0:
     n = bin(n)[2:].zfill(16)
+    print(n)
 else:
     n = abs(n)
     n = list(bin(n)[2:].zfill(15))
