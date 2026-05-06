@@ -36,6 +36,14 @@ ans = n & 0xFFFF#只保留n的低16位正好对应16位补码
 print(bin(ans)[2:].zfill(16))#转成2进制字符串，去除前缀0b,并补齐16位
 x=3.14159
 print(f"{x:.2f}")#f-string更常用：3.14
+#n进制转10进制:
+n = int(input())
+s = input().strip()
+digits="0123456789ABCDEFGHIJKLMANOPQRSTUVWXYZ"
+num = 0
+for ch in s:
+    value = digits.index(ch)
+    num = num*n + value
 #长度、范围、枚举
 print(len("hello"))#5
 print(len[1,2,3])#3
@@ -179,3 +187,20 @@ for item in combinations(range(1,5),3):
     print(item)#从1-4中选3个组合，不考虑顺序(1,2,3)(1,2,4)(1,3,4)(2,3,4)
 for item in permutations([1,2,3],2):
     print(item)#从列表中选两个进行排列(1,2)(2,1)(1,3)(3,1)(2,3)(3,2)
+#互质函数
+def coprime(a,b):
+    while a%b != 0:
+        r = a%b
+        a = b
+        b = r
+    if b == 1:
+        return True
+    else:
+        return False
+#因子和函数
+def mysum(x):
+    sum = 0
+    for i in range(1,x//2+1):
+        if x%i == 0:
+            sum += i
+    return sum
