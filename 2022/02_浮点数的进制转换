@@ -1,5 +1,5 @@
 digits = "0123456789ABCDEF"
-num_str = input().split()
+num_str = input().strip()
 base = int(input())
 precision = 10
 def convert_int_part(n,base):

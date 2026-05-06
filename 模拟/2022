@@ -25,7 +25,7 @@ for i in range(L,R+1):
 
 #02
 x,base = map(int,input().split())#读入的是十进制浮点数
-#x = input.split()
+#x = input.strip()
 #base=int(input())
 digits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 def convert_int(x,n):
@@ -51,7 +51,7 @@ def convert_little(x,n):
 #     if x == "":
 #         return ""
 #     numerator = int(x)
-#     demoninator = 10*len(x)
+#     demoninator = 10**len(x)
 #     res=[]
 #     for _ in range(precision):
 #         if numerator == 0:
@@ -68,7 +68,7 @@ if ".".find(x):#if "." in x:
 #    int1 = x
 #    little1 = ""
 intpart = convert_int(int1,base)#intpart = convert_int(int(int1),base)
-littlepart = convert_little(little1,base)
+littlepart = convert_little(little1,base,precision=8)
 #if little1 = "":
 #    print(intpart)
 #else:
@@ -147,3 +147,136 @@ while left<=right and top<=bottom:
             res.append(matrix[d][left])
         left+=1
 print(*res)
+#------------------------------------------------------------
+
+
+
+#01
+L,R = map(int,input().split())
+def is_prime(x):
+    if x<2:
+        return False
+    for i in range(2,int(x**0.5)+1):
+        if x%i == 0:
+            return False
+    return True
+def is_pure_prime(x):
+    s = str(x)
+    for i in range(len(s)):
+        x = int(s[i:])
+        if not is_prime(x):
+            return False
+    return True
+for num in range(L,R+1):
+    if is_pure_prime(num):
+        print(num)
+#---------------------------------------------------------------
+
+
+
+#02
+digits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+num_str = input().strip()
+base = int(input())
+precision = 10
+def convert_int(n,base):
+    if n == 0:
+        return "0"
+    res = []
+    while n > 0:
+        res.append(digits[n % base])
+        n //= base
+    res.reverse()
+    return "".join(res)
+def convert_little(x,base,precision):
+    if x == "":
+        return ""
+    numerator = int(x)
+    denominator = 10**len(x)
+    res = []
+    for _ in range(precision):
+        if numerator == 0:
+            break
+        numerator *= base
+        res.append(digits[numerator//denominator])
+        numerator %= denominator
+    return "".join(res)
+if "." in num_str:
+    int1,little1 = num_str.split(".")
+else:
+    int1 = num_str
+    little1 = ""
+int_part = int(int1)
+int_res = convert_int(int_part,base)
+little_res = convert_little(little1,base,precision)
+if little_res == "":
+    print(int_res)
+else:
+    print(int_res + "." + little_res)
+#---------------------------------------------------------------------------
+
+
+
+#03
+n = int(input())
+students = []
+for _ in range(n):
+    student_id,name,score = input().split()
+    id,score = float(id),float(score)
+    students.append([student_id,name,score])
+students.sort(key=lambda x: (-x[2],x[0]))
+id_width = max(len("学号"),max(len(s[0]) for s in students))
+name_width = max(len("姓名"),max(len(s[1]) for s in students))
+score_width = max(len("成绩"),max(len(f"{s[2]:.2f}")for s in students))
+print(f"{'排名':<4}{'学号':<{id_width}}{'姓名':<{name_width}}{'成绩':>{score_width}}")
+print("-"*(10+id_width+name_width+score_width))
+for i in range(len(students)):
+    rank = i+1
+    student_id = students[i][0]
+    name = students[i][1]
+    score = students[i][2]
+    print(f"{rank:<4}{student_id:<{id_width}}{name:<{name_width}}{score:>{score_width}.2f}")
+#简化版
+n = int(input())
+students=[]
+for _ in range(n):
+    name,number,score = map(str,input().split())
+    number,score = float(number,score)
+    students.append((name,number,score))
+students.sort(key=lambda x :(-x[2],x[1]))
+for i in range(len(students)):
+    print(students[i])
+#-----------------------------------------------------------------------------------
+
+
+
+#04
+from datetime import date,timedelta
+start_year,start_month,start_day = map(int,input().split())
+target_year,target_month,target_day = map(int,input().split())
+start_date = date(start_year,start_month,start_day)
+target_date = date(target_year,target_month,target_day)
+days = (target_date-start_date).days
+position = days%5
+if position < 3:
+    print("打鱼")
+else:
+    print("晒网")
+
+
+
+
+
+
+
+from datetime import datetime,timedelta
+start_date = input().strip()
+target_date = input().strip()
+start = datetime.strptime(start_date,"%Y%m%d")
+target = datetime.strptime(target_date,"%Y%m%d")
+days = (target - start).days
+position = days%5
+if position < 3:
+    print("打鱼")
+else:
+    print("晒网")

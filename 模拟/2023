@@ -134,3 +134,103 @@ while left<=right and top<=bottom:
 #   values += 1
 #for row in matrix:
 #    print(*row)
+
+
+
+#---------------------------------------------------------------
+#01
+n = int(input())
+if n>=0:
+    n = bin(n)[2:].zfill(16)
+    print(n)
+else:
+    n = abs(n)
+    n = list(bin(n)[2:].zfill(15))
+    for i in range(len(n)):
+        if n[i]=='0':
+            n[i]='1'
+        else:
+            n[i]='0'
+    ans = int('1'+''.join(n),2)+1
+    print(bin(ans)[2:])
+#-----------------------------------------------------------------
+
+
+
+#02
+def is_h_number(x):
+    return x%4==1
+def is_h_prime(x):
+    if x<=1:
+        return False
+    if not is_h_prime(x):
+        return False
+    for i in range(2,int(x**0.5)+1):
+        if x%i==0:
+            return False
+    return True
+h_primes = []
+for num in range(1,150):
+    if is_h_prime(num):
+        h_primes.append(num)
+ans = []
+for i in range(len(h_primes)):
+    for j in range(i,len(h_primes)):
+        products = h_primes[i] * h_primes[j]
+        if products < 150:
+            ans.append((products,h_primes[i],h_primes[j]))
+        else:
+            break
+ans.sort()
+for items in ans:
+    print(f"{items[0]}={items[1]*items[2]}")
+#------------------------------------------------------------------
+
+
+
+#03
+n = input().strip()
+count = 0
+while True:
+    n = n.zfill(4)
+    big = int("".join(sorted(n,reverse=True)))
+    small = int("".joni(sorted(n)))
+    diff = big-small
+    count+=1
+    if diff==6174:
+        print(count)
+        break
+    n = str(diff)
+#--------------------------------------------------------------------
+
+
+
+#04
+from datetime import datetime,timedelta
+date_str = input().strip()
+current_date = datetime.strptime(date_str,"%Y%m%d")
+while True:
+    current_date += timedelta(days=1)
+    s = current_date.strftime(current_date,"%Y%m%d")
+    if s == s[::-1]:
+        print(s)
+        break
+#----------------------------------------------------------------------
+
+
+
+#05
+n = int(input())
+matrix = [[0]*n-1 for _ in range(n-1)]
+for layer in range((n//2)):
+    values = layer+1
+    for a in range(layer,n-1-layer):
+        matrix[layer][a] = values
+    for b in range(layer,n-1-layer):
+        matrix[n-1-layer-1,b] = values
+    for c in range(layer,n-1-layer):
+        matrix[c][layer] = values
+    for d in range(layer,n-1-layer):
+        matrix[d][n-1-layer] = values
+    for row in matrix:
+        print(*row)

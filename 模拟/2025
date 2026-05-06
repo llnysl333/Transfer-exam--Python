@@ -161,3 +161,115 @@ for i in range(a,b+1):
             count+=1
     if count == k:
         print(i)
+#-----------------------------------------------------------------------
+
+
+
+#01
+m,n = map(int,input().split())
+def is_prime(x):
+    if x<2:
+        return False
+    for i in range(2,int(x**0.5)+1):
+        if x%i == 0:
+            return False
+    return True
+def check(x):
+    s = str(x)
+    a=int(s[:-1])
+    b=int(s[:-2])
+    c=int(s[:-3])
+    return (a+b)%10==c
+count = 0
+for x in range(n,m-1,-1):
+    if is_prime(x) and check(x):
+        print(x,end=" ")
+        count += 1
+        if count == 5:
+            print()
+            count = 0
+
+
+
+#----------------------------------------------------------------------------------
+#02
+s = input().strip()
+n = int(input())
+parts = []
+for i in range(0,len(s),n):
+    parts.append(s[i:i+n])
+result = []
+for i in range(len(parts)):
+    part = parts[i]
+    move = i % len(parts)
+    if move == 0:
+        result.append(part)
+    else:
+        new_part = part[-move:] + part[:-move]
+        result.append(new_part)
+print("".join(result))
+
+
+
+#-------------------------------------------------------------------------------------
+#03
+from datetime import datetime,timedelta
+start = datetime(1921,7,23,12,0,0)
+end = datetime(2020,7,1,12,0,0)
+diff = (end - start).total_seconds//60
+print(diff)
+
+
+
+#-----------------------------------------------------------------------------
+#04
+n = int(input())
+fib = [1,1]
+while fib[-1]<n:
+    fib.append(fib[-1]+fib[-2])
+result = []
+for i in range(len(fib)-1,-1,-1):
+    if fib[i]<=n:
+        result.append(fib[i])
+        n-=fib[i]
+    if n == 0:
+        break
+print(f"{n}=",end="")
+for i in range(len(result)):
+    if i>0:
+        print("+",end="")
+    print(result[i],end="")
+
+
+
+
+#---------------------------------------------------------------------------
+#05
+digits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+l,r,a,b,k = map(int,input().split())
+def to_base(x,base):
+    if n == 0:
+        return "o"
+    res=[]
+    while x>0:
+        res.append(digits[x%base])
+        x//=base
+    return "".join(res[::-1])
+def is_wave(x):
+    s=str(x)
+    if len(s)<=1:
+        return True
+    if s[0]==s[1]:
+        return False
+    for i in range(2,len(s)):
+        if s[i] != s[i-2]:
+            return False
+    return True
+for x in range(a,b+1):
+    count=0
+    for base in range(l,r+1):
+        s = to_base(x,base)
+        if is_wave(s):
+            count+=1
+    if count==k:
+        print(x)

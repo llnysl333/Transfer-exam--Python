@@ -132,3 +132,113 @@ while not found:
 #             print(d)
 #             exit()
 #     d += 30
+
+
+
+#--------------------------------------------------------------------
+#01
+def is_palindrome(x):
+    s=str(x)
+    return s==s[::-1]
+for x in range(10,1001):
+    if is_palindrome(x) and is_palindrome(x*x) and is_palindrome(x**3):
+        print(x)
+#-------------------------------------------------------------------
+
+
+
+#02
+prices = list(map(int,input().split()))
+n = len(prices)
+ans = n*(n-1)*(n-2)//6
+print(ans)
+#----------------------------------------------------------------------
+
+
+
+#03
+v = int(input())
+n = 1
+while n*(n-1)//2 < v:
+    n+=1
+letters=[]
+left = 1
+right = n
+remain = v
+while left < right:
+    can_make = right-left
+    if remain > can_make:
+        letters.append(chr(ord('a')+right-1))
+        remain -= can_make
+        right -= 1
+    else:
+        letters.append(chr(ord('a')+left-1))
+        left += 1
+        letters.append(chr(ord('a')+left-1))
+print("".join(letters))
+#------------------------------------------------------------------------
+
+
+
+#04
+n,k = map(int,input().split())
+chocolates = []
+for _ in range(n):
+    h,w = map(int,input().split())
+    chocolates.append(h,w)
+def can_cut(side):
+    count = 0
+    for h,w in chocolates:
+        count += (h//side)*(w//side)
+    return count >= k
+left = 1
+right = max(max(h,w) for h,w in chocolates)
+ans = 1
+while left <= right:
+    mid = (left+right)//2
+    if can_cut(mid):
+        ans = mid
+        left = mid + 1
+    else:
+        right = mid - 1
+print(ans)
+#-----------------------------------------------------------------------
+
+
+
+
+#05
+def is_prime(x):
+    if x<2:
+        return False
+    for i in range(2,int(x**0.5)+1):
+        if x%i == 0:
+            return False
+    return True
+d = 30
+#法一
+while True:
+    found = False
+    for a in range(2,10000):
+        ok = True
+        for k in range(10):
+            current = a+k*d
+            if not is_prime(current):
+                ok = False
+                break
+        if ok:
+            print(d)
+            found=True
+    if found:
+        break
+    d += 30
+#法二
+while True:
+    for num1 in range(2,10000):
+        for k in range(10):
+            if not is_prime(num1+k*d):
+                break
+        else:
+            print(d)
+            exit()
+    d += 30

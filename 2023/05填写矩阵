@@ -40,3 +40,29 @@ for layer in range((n//2)):
 #         matrix[i][size-layer-1] = value把右边这一层设为当前层数字
 #     for row in matrix:遍历矩阵的每一行并按空格输出这一行
 #         print(*row)
+#法二
+# n = int(input())
+# matrix = [[0]*(n-1) for _ in range(n-1)]
+# left = 0
+# right = n-2
+# top = 0
+# bottom = n-2
+# values = 1
+# while left<=right and top<=bottom:
+#     for a in range(left,right+1):
+#         matrix[top][a] = values
+#     top += 1
+#     for b in range(top,bottom+1):
+#         matrix[b][right] = values
+#     right -= 1
+#     if top<=bottom:
+#         for c in range(right,left-1,-1):
+#             matrix[bottom][c] = values
+#         bottom -= 1
+#     if left<=right:
+#         for d in range(bottom,top-1,-1):
+#             matrix[d][left] = values
+#         left += 1
+#     values += 1
+# for row in matrix:
+#     print(*row)
