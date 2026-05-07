@@ -1,167 +1,393 @@
-#01
-def is_prime(x):
-    if x < 2:
-        return False
-    for i in range(2,int(x**0.5)+1):
-        if x % i == 0:
-            return False
-    return True
-m,n = map(int,input().split())
-count=0
-#----------------------------------------
-for num in range(m,n+1):
-    a=num%10
-    b=(num//10)%10
-    c=(num//100)%10
-    if (a+b)%10==c:
-        if count<5:
-            print(num,end=" ")
-            count+=1
-        else:
-            print()
-            print(num,end="")
-            count=0
-#--------修改----------------------
-# def check(x):
-#     s=str(x)
-#     if len(x)<3:
+# #01
+# def is_prime(x):
+#     if x < 2:
 #         return False
-#     a = int(s[-1])
-#     b = int(s[-2])
-#     c = int(s[-3])
+#     for i in range(2,int(x**0.5)+1):
+#         if x % i == 0:
+#             return False
+#     return True
+# m,n = map(int,input().split())
+# count=0
+# #----------------------------------------
+# for num in range(m,n+1):
+#     a=num%10
+#     b=(num//10)%10
+#     c=(num//100)%10
+#     if (a+b)%10==c:
+#         if count<5:
+#             print(num,end=" ")
+#             count+=1
+#         else:
+#             print()
+#             print(num,end="")
+#             count=0
+# #--------修改----------------------
+# # def check(x):
+# #     s=str(x)
+# #     if len(x)<3:
+# #         return False
+# #     a = int(s[-1])
+# #     b = int(s[-2])
+# #     c = int(s[-3])
+# #     return (a+b)%10==c
+# # for num in range(n,m-1,-1):
+# #     if is_prime(num) and check(num):
+# #         print(num,end=" ")
+# #         count+=1
+# #         if count == 5:
+# #             print()
+# #             count=0
+# #------------------------------------
+
+
+
+# #02
+# s=input().strip()
+# n=int(input())
+# #-----------------------------------------
+# s2=[]
+# for i in range((len(s)+n-1)//n):
+#     s[i]=s[i*n:i*n+n]
+#     s2.append(s[i])
+# s[i]=s[len(s[i])-i:]+s[0:len(s[i])-i]
+# print("".join(s2))
+# #-----------------修改-----------------------
+# # parts=[]
+# # for i in range(0,len(s),n):
+# #     parts.append(s[i:i+n])
+# # result=[]
+# # for i in range(len(parts)):
+# #     part=parts[i]
+# #     move=i%len(part)
+# #     if move==0:
+# #         result.append(part)
+# #     else:
+# #         new_part=part[-move:]+[:-move]
+# #         result.append(new_part)
+# # print("".join(result))
+# #----------------------------------------
+
+
+
+# #03
+# from datetime import datetime,timedelta
+# start=datetime(1921,07,23,12,00,00)#start=datetime(1921,7,23,12,0,0)
+# end=datetime(2020,07,01,12,00)#end=datetime(2020,7,1,12,0,0)
+# diff=(end-start).minute#diff=end-start
+# #minutes=int(diff.total_seconds()//60)
+# #print(minutes)
+# print(diff)
+# #------------------------------------------------------------------------------
+
+
+
+# #04
+# def fac(x):
+#     if x==1 or x == 2:
+#         return 1
+#     else:
+#         return fac(x-1)+fac(x-2)
+# x=int(input())
+# res=[]
+# n=1
+# while fac(n)<x:
+#     res.append(fac(n))
+#     n+=1
+# res2=[]
+# for i in range(n-1,0,-1):
+#     while x>fac(i):
+#         res2.append(fac(i))
+#         x -= fac(i)
+# for i in range(len(res2)):
+#     if i != 0:
+#         print("+ res[i]")
+#     else:
+#         print("x = {res[i]}")
+# #-----------------修改-------------------------------
+# # n=int(input())
+# # fib=[1,1]
+# # while fib[-1]<n:
+# #     fib.append(fib[-1]+fib[-2])
+# # result=[]
+# # for i in range(len(fib)-1,-1,-1):
+# #     if fib[i]<=n:
+# #         result.append(fib[i])
+# #         n-=fib[i]
+# #     if n==0:
+# #         break
+# # print(f"{n}=",end=" ")
+# # for i in range(len(result)):
+# #     if i>0:
+# #         print("+",end="")
+# #     print(result[i],end="")
+# #----------------------------------------------------
+
+
+
+# #05
+# def convert(x,n):
+#     digits="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+#     res=[]
+#     #if n==0:
+#     #    return "0"
+#     while x>0:
+#         res.append(digits[x%n])
+#         x //= n
+# #-----------------------------------------
+#     s=str(res)
+#     return s[::-1]
+#     #列表转字符串不能直接str，要用join
+#     # res.reverse()
+#     # return "".join(res)
+#     #或者return "".join(res[::-1])
+# #--------------------------------------
+# def is_wave(x):
+#     s=str(x)
+#     if len(x)==1:
+#         return True
+#     elif len(x)==2:
+#         return False
+#     else:
+#         for i in range(len(s),0,-1):
+#             if s[i]!=s[i-2]:
+#                 return False
+#         return True
+# l,r,a,b,k = map(int,input().split())
+# count=0#count不能放外面，每个数都要计算重数
+# for i in range(a,b+1):
+# #count=0
+#     for j in range(l,r+1):
+#         if is_wave(convert(i,j)):
+#             count+=1
+#     if count == k:
+#         print(i)
+# #-----------------------------------------------------------------------
+
+
+
+# #01
+# m,n = map(int,input().split())
+# def is_prime(x):
+#     if x<2:
+#         return False
+#     for i in range(2,int(x**0.5)+1):
+#         if x%i == 0:
+#             return False
+#     return True
+# def check(x):
+#     s = str(x)
+#     a=int(s[:-1])
+#     b=int(s[:-2])
+#     c=int(s[:-3])
 #     return (a+b)%10==c
-# for num in range(n,m-1,-1):
-#     if is_prime(num) and check(num):
-#         print(num,end=" ")
-#         count+=1
+# count = 0
+# for x in range(n,m-1,-1):
+#     if is_prime(x) and check(x):
+#         print(x,end=" ")
+#         count += 1
 #         if count == 5:
 #             print()
-#             count=0
-#------------------------------------
+#             count = 0
 
 
 
-#02
-s=input().strip()
-n=int(input())
-#-----------------------------------------
-s2=[]
-for i in range((len(s)+n-1)//n):
-    s[i]=s[i*n:i*n+n]
-    s2.append(s[i])
-s[i]=s[len(s[i])-i:]+s[0:len(s[i])-i]
-print("".join(s2))
-#-----------------修改-----------------------
-# parts=[]
+# #----------------------------------------------------------------------------------
+# #02
+# s = input().strip()
+# n = int(input())
+# parts = []
 # for i in range(0,len(s),n):
 #     parts.append(s[i:i+n])
-# result=[]
+# result = []
 # for i in range(len(parts)):
-#     part=parts[i]
-#     move=i%len(part)
-#     if move==0:
+#     part = parts[i]
+#     move = i % len(parts)
+#     if move == 0:
 #         result.append(part)
 #     else:
-#         new_part=part[-move:]+[:-move]
+#         new_part = part[-move:] + part[:-move]
 #         result.append(new_part)
 # print("".join(result))
-#----------------------------------------
 
 
 
-#03
-from datetime import datetime,timedelta
-start=datetime(1921,07,23,12,00,00)#start=datetime(1921,7,23,12,0,0)
-end=datetime(2020,07,01,12,00)#end=datetime(2020,7,1,12,0,0)
-diff=(end-start).minute#diff=end-start
-#minutes=int(diff.total_seconds()//60)
-#print(minutes)
-print(diff)
-#------------------------------------------------------------------------------
+# #-------------------------------------------------------------------------------------
+# #03
+# from datetime import datetime,timedelta
+# start = datetime(1921,7,23,12,0,0)
+# end = datetime(2020,7,1,12,0,0)
+# diff = (end - start).total_seconds//60
+# print(diff)
 
 
 
-#04
-def fac(x):
-    if x==1 or x == 2:
-        return 1
-    else:
-        return fac(x-1)+fac(x-2)
-x=int(input())
-res=[]
-n=1
-while fac(n)<x:
-    res.append(fac(n))
-    n+=1
-res2=[]
-for i in range(n-1,0,-1):
-    while x>fac(i):
-        res2.append(fac(i))
-        x -= fac(i)
-for i in range(len(res2)):
-    if i != 0:
-        print("+ res[i]")
-    else:
-        print("x = {res[i]}")
-#-----------------修改-------------------------------
-# n=int(input())
-# fib=[1,1]
+# #-----------------------------------------------------------------------------
+# #04
+# n = int(input())
+# fib = [1,1]
 # while fib[-1]<n:
 #     fib.append(fib[-1]+fib[-2])
-# result=[]
+# result = []
 # for i in range(len(fib)-1,-1,-1):
 #     if fib[i]<=n:
 #         result.append(fib[i])
 #         n-=fib[i]
-#     if n==0:
+#     if n == 0:
 #         break
-# print(f"{n}=",end=" ")
+# print(f"{n}=",end="")
 # for i in range(len(result)):
 #     if i>0:
 #         print("+",end="")
 #     print(result[i],end="")
-#----------------------------------------------------
 
 
 
-#05
-def convert(x,n):
-    digits="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    res=[]
-    #if n==0:
-    #    return "0"
-    while x>0:
-        res.append(digits[x%n])
-        x //= n
-#-----------------------------------------
-    s=str(res)
-    return s[::-1]
-    #列表转字符串不能直接str，要用join
-    # res.reverse()
-    # return "".join(res)
-    #或者return "".join(res[::-1])
-#--------------------------------------
-def is_wave(x):
-    s=str(x)
-    if len(x)==1:
-        return True
-    elif len(x)==2:
-        return False
-    else:
-        for i in range(len(s),0,-1):
-            if s[i]!=s[i-2]:
-                return False
-        return True
-l,r,a,b,k = map(int,input().split())
-count=0#count不能放外面，每个数都要计算重数
-for i in range(a,b+1):
-#count=0
-    for j in range(l,r+1):
-        if is_wave(convert(i,j)):
-            count+=1
-    if count == k:
-        print(i)
-#-----------------------------------------------------------------------
+
+# #---------------------------------------------------------------------------
+# #05
+# digits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+# l,r,a,b,k = map(int,input().split())
+# def to_base(x,base):
+#     if n == 0:
+#         return "o"
+#     res=[]
+#     while x>0:
+#         res.append(digits[x%base])
+#         x//=base
+#     return "".join(res[::-1])
+# def is_wave(x):
+#     s=str(x)
+#     if len(s)<=1:
+#         return True
+#     if s[0]==s[1]:
+#         return False
+#     for i in range(2,len(s)):
+#         if s[i] != s[i-2]:
+#             return False
+#     return True
+# for x in range(a,b+1):
+#     count=0
+#     for base in range(l,r+1):
+#         s = to_base(x,base)
+#         if is_wave(s):
+#             count+=1
+#     if count==k:
+#         print(x)
+
+
+
+
+
+# #---------------------------------------------------------
+# #01
+# m,n = map(int,input().split())
+# def is_prime(x):
+#     if x<2:
+#         return False
+#     for i in range(2,int(x**0.5)+1):
+#         if x%i == 0:
+#             return False
+#     return True
+# def check(x):
+#     s = str(x)
+#     if len(s)<3:
+#         return False
+#     a = int(s[-1])
+#     b = int(s[-2])
+#     c = int(s[-3])
+#     return (a+b)%10 == c
+# count = 0
+# for i in range(n,m-1,-1):
+#     if is_prime(i) and check(i):
+#         print(i,end=" ")
+#         count+=1
+#         if count == 5:
+#             print()
+#             count = 0
+# #-------------------------------------------------------
+
+
+
+# #02
+# s = input().strip()
+# n = int(input())
+# parts = []
+# for i in range(0,len(s),n):
+#     parts.append(s[i:i+n])
+# res = []
+# for part in parts:
+#     move = i%len(part)
+#     if move == 0:
+#         new_part = part
+#     else:
+#         new_part = part[-move:]+part[0:-move]
+#     res.append(new_part)
+# print("".join(res))
+# #-------------------------------------------------------
+
+
+
+# #03
+# from datetime import datetime,timedelta
+# start = datetime(1921,7,23,12,0,0)
+# end = datetime(2020,7,1,12,0,0)
+# diff = (end-start).total_seconds//60
+# print(diff)
+# #--------------------------------------------------------
+
+
+
+# #04
+# fib = [1,1]
+# x = int(input())
+# while x>fib[-1]:
+#         fib.append(fib[-1]+fib[-2])
+# res = []
+# remain = x
+# for i in range(len(fib)-1,-1,-1):
+#     if remain>fib[i]:
+#         res.append(fib[i])
+#         remain -= fib[i]
+#     if remain == 0:
+#         break
+# print(f"{x} = ",end="")
+# for i in range(len(res)):
+#     if i>0:
+#         print("+",end="")
+#     print(res(i),end="")
+# #---------------------------------------------------------
+
+
+
+# #05
+# def convert(x,n):
+#     digits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+#     if x == 0:
+#         return "0"
+#     res = []
+#     while x>0:
+#         res.append(digits[x%n])
+#         x //= n
+#     return "".join(res[::-1])
+# def is_wave(x):
+#     s = str(x)
+#     if len(s) == 1:
+#         return True
+#     if s[0] == s[1]:
+#         return False
+#     for i in range(2,len(s)):
+#         if s[i]!=s[i-2]:
+#             return False
+#     return True
+# l,r,a,b,k = map(int,input().split())
+# for i in range(a,b+1):
+#     count = 0
+#     for j in range(l,r+1):
+#         if is_wave(convert(i,j)):
+#             count += 1
+#     if count == k:
+#         print(i)
+# #------------------------------------------------------------------
 
 
 
@@ -176,22 +402,24 @@ def is_prime(x):
     return True
 def check(x):
     s = str(x)
-    a=int(s[:-1])
-    b=int(s[:-2])
-    c=int(s[:-3])
-    return (a+b)%10==c
+    if len(s)<3:
+        return False
+    a = int(s[-1])
+    b = int(s[-2])
+    c = int(s[-3])
+    return (a+b)%10 == c
 count = 0
 for x in range(n,m-1,-1):
     if is_prime(x) and check(x):
-        print(x,end=" ")
+        print(x,end="")
         count += 1
         if count == 5:
             print()
             count = 0
+#-----------------------------------------------------------------
 
 
 
-#----------------------------------------------------------------------------------
 #02
 s = input().strip()
 n = int(input())
@@ -199,77 +427,76 @@ parts = []
 for i in range(0,len(s),n):
     parts.append(s[i:i+n])
 result = []
-for i in range(len(parts)):
-    part = parts[i]
-    move = i % len(parts)
+for part in parts:
+    move = i%len(part)
     if move == 0:
-        result.append(part)
+        new_part = part
     else:
-        new_part = part[-move:] + part[:-move]
-        result.append(new_part)
+        new_part = part[-move:]+part[:-move]
+    result.append(new_part)
 print("".join(result))
+#--------------------------------------------------------------------
 
 
 
-#-------------------------------------------------------------------------------------
 #03
 from datetime import datetime,timedelta
 start = datetime(1921,7,23,12,0,0)
 end = datetime(2020,7,1,12,0,0)
-diff = (end - start).total_seconds//60
+diff = (end-start).total_seconds//60
 print(diff)
+#--------------------------------------------------------------
 
 
 
-#-----------------------------------------------------------------------------
 #04
 n = int(input())
 fib = [1,1]
-while fib[-1]<n:
+while fib[-1] < n:
     fib.append(fib[-1]+fib[-2])
 result = []
+remain = n
 for i in range(len(fib)-1,-1,-1):
-    if fib[i]<=n:
+    if fib[i]<remain:
         result.append(fib[i])
-        n-=fib[i]
-    if n == 0:
+        remain -= fib[i]
+    if remain == 0:
         break
 print(f"{n}=",end="")
 for i in range(len(result)):
     if i>0:
         print("+",end="")
     print(result[i],end="")
+#---------------------------------------------------------------------
 
 
 
-
-#---------------------------------------------------------------------------
 #05
 digits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 l,r,a,b,k = map(int,input().split())
-def to_base(x,base):
-    if n == 0:
-        return "o"
-    res=[]
+def convert(x,n):
+    if x==0:
+        return "0"
+    res = []
     while x>0:
-        res.append(digits[x%base])
-        x//=base
+        res.append(digits[x%n])
+        x //= n
     return "".join(res[::-1])
 def is_wave(x):
-    s=str(x)
-    if len(s)<=1:
+    s = str(x)
+    if len(s) == 1:
         return True
-    if s[0]==s[1]:
+    if s[0] == s[1]:
         return False
     for i in range(2,len(s)):
         if s[i] != s[i-2]:
             return False
     return True
-for x in range(a,b+1):
-    count=0
-    for base in range(l,r+1):
-        s = to_base(x,base)
-        if is_wave(s):
-            count+=1
-    if count==k:
-        print(x)
+for i in range(a,b+1):
+    count = 0
+    for j in range(l,r+1):
+        if is_wave(convert(i,j)):
+            count += 1
+    if count == k:
+        print(i)
+#---------------------------------------------------------------------

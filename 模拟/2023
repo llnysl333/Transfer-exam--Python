@@ -1,206 +1,297 @@
+# #01
+# n = int(input())
+# if n>=0:
+#     res = bin(n)[2:].zfill(16)
+#     print(res)
+# else:
+#     n = abs(n)
+# #---------------------------------------
+#     res = str(bin(n)[2:].zfill(15))
+#     for ch in res:
+#         if ch=="1":
+#             ch = 0
+#         else:
+#             ch = 1
+#     res = int(res) + 1
+#     res = bin(res)[2:].zfill(15)
+#     print("1"+str(res))
+# #------------------修改----------------------
+#     n = list(bin(n)[2:].zfill(15))
+#     for i in range(len(n)):
+#         if n[i] == '0':
+#             n[i] = '1'
+#         else:
+#             n[i] = '0'
+#     res = int('1'+''.join(n),2)+1
+#     print(bin(res)[2:])
+# #ch只是临时变量，无法修改res
+# #-------------------------------------------
+
+
+
+# #02
+# def is_prime(x):
+#     if x<2:
+#         return False
+#     for i in range(2,int(x**0.5)+1):
+#         if x%i == 0:
+#             return False
+#     return True
+# def H_prime(x):
+#     if x%4 != 1:
+#         return False
+#     if not is_prime(x):
+#         return False
+#     return True
+# res=[]
+# for i in range(2,151):
+#     for j in range(2,151//2):#for j in range(i,151//2):从i开始能去重
+#         if H_prime(i) and H_prime(j) and i*j<=150:
+#             res.append(i*j)
+# #需要排序res.sort()
+# for i in range(len(res)):
+#     print(i)#print(res[i])
+# #----------------------------------------------------
+
+
+
+# #03
+# n=int(input())#n=input().strip()
+# s = str(n)
+# count = 0
+# while n != 6174:
+#     big = "".join(s,reverse=True)#big=int("".join(sorted(s,reverse=True)))
+#     small = "".join(s)#small=int("".join(s))
+# #-----------------------------------------------------------
+#     n = (big-small).zfill(4)
+#     count += 1
+#     s=str(n)
+# print(count)
+# #-----------------------修改-------------------------------
+# #     n = big-small
+# #     s=str(n).zfill(4)
+# #     count+=1
+# # print(count)
+# #---------------------------------------------------
+
+
+
+
+# #04
+# from datetime import datetime,timedelta
+# start = int(input())#没有整数转日期对象是字符串转日期对象
+# #start = input().strip()
+# start = datetime(start,"%Y%m%d")#start = datetime.striptime(start,"%Y%m%d")
+# #----------------------------------------------------
+# delta = timedelta(days=1)
+# def is_palindrome(x):
+#     s = str()
+#     return s == s[::-1]
+# d = start.strftime("%Y%m%d")
+# while True:
+#     if is_palindrome(d):
+#         print(d)
+#         break
+#     else:
+#         d = datetime.strptime(d,"%Y%m%d")
+#         d += delta
+# #-----------------------修改--------------------------------
+# while True:
+#     d += timedelta(days=1)
+#     s = d.strftime("%Y%m%d")
+#     if s == s[::-1]:
+#         print(s)
+#         break
+# #可以引入s就不用重复转换d了
+# #------------------------------------------------------------
+
+
+
+
+# #05
+# n = int(input())
+# matrix = [[0]*(n-1) for _ in range(n-1)]
+# left = 0
+# right = n-2
+# top = 0
+# bottom = n-2
+# values = 1
+# while left<=right and top<=bottom:
+#     for a in range(left,right+1):
+#         matrix[top][a] = values
+#     top += 1
+#     for b in range(top,bottom+1):
+#         matrix[b][right] = values
+#     right -= 1
+#     if top<=bottom:
+#         for c in range(right,left-1,-1):
+#             matrix[bottom][c] = values
+#         bottom -= 1
+#     if left<=right:
+#         for d in range(bottom,top-1,-1):
+#             matrix[d][left] = values
+#         left += 1
+# #   values += 1
+# #for row in matrix:
+# #    print(*row)
+
+
+
+# #---------------------------------------------------------------
+# #01
+# n = int(input())
+# if n>=0:
+#     n = bin(n)[2:].zfill(16)
+#     print(n)
+# else:
+#     n = abs(n)
+#     n = list(bin(n)[2:].zfill(15))
+#     for i in range(len(n)):
+#         if n[i]=='0':
+#             n[i]='1'
+#         else:
+#             n[i]='0'
+#     ans = int('1'+''.join(n),2)+1
+#     print(bin(ans)[2:])
+# #-----------------------------------------------------------------
+
+
+
+# #02
+# def is_h_number(x):
+#     return x%4==1
+# def is_h_prime(x):
+#     if x<=1:
+#         return False
+#     if not is_h_prime(x):
+#         return False
+#     for i in range(2,int(x**0.5)+1):
+#         if x%i==0:
+#             return False
+#     return True
+# h_primes = []
+# for num in range(1,150):
+#     if is_h_prime(num):
+#         h_primes.append(num)
+# ans = []
+# for i in range(len(h_primes)):
+#     for j in range(i,len(h_primes)):
+#         products = h_primes[i] * h_primes[j]
+#         if products < 150:
+#             ans.append((products,h_primes[i],h_primes[j]))
+#         else:
+#             break
+# ans.sort()
+# for items in ans:
+#     print(f"{items[0]}={items[1]*items[2]}")
+# #------------------------------------------------------------------
+
+
+
+# #03
+# n = input().strip()
+# count = 0
+# while True:
+#     n = n.zfill(4)
+#     big = int("".join(sorted(n,reverse=True)))
+#     small = int("".joni(sorted(n)))
+#     diff = big-small
+#     count+=1
+#     if diff==6174:
+#         print(count)
+#         break
+#     n = str(diff)
+# #--------------------------------------------------------------------
+
+
+
+# #04
+# from datetime import datetime,timedelta
+# date_str = input().strip()
+# current_date = datetime.strptime(date_str,"%Y%m%d")
+# while True:
+#     current_date += timedelta(days=1)
+#     s = current_date.strftime(current_date,"%Y%m%d")
+#     if s == s[::-1]:
+#         print(s)
+#         break
+# #----------------------------------------------------------------------
+
+
+
+# #05
+# n = int(input())
+# matrix = [[0]*n-1 for _ in range(n-1)]
+# for layer in range((n//2)):
+#     values = layer+1
+#     for a in range(layer,n-1-layer):
+#         matrix[layer][a] = values
+#     for b in range(layer,n-1-layer):
+#         matrix[n-1-layer-1,b] = values
+#     for c in range(layer,n-1-layer):
+#         matrix[c][layer] = values
+#     for d in range(layer,n-1-layer):
+#         matrix[d][n-1-layer] = values
+#     for row in matrix:
+#         print(*row)
+#-----------------------------------------------------------------------
+
+
+
 #01
 n = int(input())
-if n>=0:
+if n >= 0:
     res = bin(n)[2:].zfill(16)
-    print(res)
 else:
     n = abs(n)
-#---------------------------------------
-    res = str(bin(n)[2:].zfill(15))
-    for ch in res:
-        if ch=="1":
-            ch = 0
-        else:
-            ch = 1
-    res = int(res) + 1
-    res = bin(res)[2:].zfill(15)
-    print("1"+str(res))
-#------------------修改----------------------
     n = list(bin(n)[2:].zfill(15))
     for i in range(len(n)):
         if n[i] == '0':
             n[i] = '1'
         else:
             n[i] = '0'
-    res = int('1'+''.join(n),2)+1
-    print(bin(res)[2:])
-#ch只是临时变量，无法修改res
-#-------------------------------------------
+    ans = int('1'+''.join(n),2)+1
+    res = bin(ans)[2:] 
+print(res)
+#--------------------------------------------------------------------
 
 
 
 #02
-def is_prime(x):
+def H_prime(x):
+    if x%4 != 1:
+        return False
     if x<2:
         return False
     for i in range(2,int(x**0.5)+1):
         if x%i == 0:
             return False
     return True
-def H_prime(x):
-    if x%4 != 1:
-        return False
-    if not is_prime(x):
-        return False
-    return True
-res=[]
-for i in range(2,151):
-    for j in range(2,151//2):#for j in range(i,151//2):从i开始能去重
-        if H_prime(i) and H_prime(j) and i*j<=150:
+res = []
+for i in range(2,150):
+    for j in range(i,150//2):
+        if H_prime(i) and H_prime(j) and i*j <= 150:
             res.append(i*j)
-#需要排序res.sort()
-for i in range(len(res)):
-    print(i)#print(res[i])
-#----------------------------------------------------
+res.sort()
+for i in res:
+    print(i)
+#----------------------------------------------------------
 
 
 
 #03
-n=int(input())#n=input().strip()
-s = str(n)
-count = 0
-while n != 6174:
-    big = "".join(s,reverse=True)#big=int("".join(sorted(s,reverse=True)))
-    small = "".join(s)#small=int("".join(s))
-#-----------------------------------------------------------
-    n = (big-small).zfill(4)
-    count += 1
-    s=str(n)
-print(count)
-#-----------------------修改-------------------------------
-#     n = big-small
-#     s=str(n).zfill(4)
-#     count+=1
-# print(count)
-#---------------------------------------------------
-
-
-
-
-#04
-from datetime import datetime,timedelta
-start = int(input())#没有整数转日期对象是字符串转日期对象
-#start = input().strip()
-start = datetime(start,"%Y%m%d")#start = datetime.striptime(start,"%Y%m%d")
-#----------------------------------------------------
-delta = timedelta(days=1)
-def is_palindrome(x):
-    s = str()
-    return s == s[::-1]
-d = start.strftime("%Y%m%d")
-while True:
-    if is_palindrome(d):
-        print(d)
-        break
-    else:
-        d = datetime.strptime(d,"%Y%m%d")
-        d += delta
-#-----------------------修改--------------------------------
-while True:
-    d += timedelta(days=1)
-    s = d.strftime("%Y%m%d")
-    if s == s[::-1]:
-        print(s)
-        break
-#可以引入s就不用重复转换d了
-#------------------------------------------------------------
-
-
-
-
-#05
-n = int(input())
-matrix = [[0]*(n-1) for _ in range(n-1)]
-left = 0
-right = n-2
-top = 0
-bottom = n-2
-values = 1
-while left<=right and top<=bottom:
-    for a in range(left,right+1):
-        matrix[top][a] = values
-    top += 1
-    for b in range(top,bottom+1):
-        matrix[b][right] = values
-    right -= 1
-    if top<=bottom:
-        for c in range(right,left-1,-1):
-            matrix[bottom][c] = values
-        bottom -= 1
-    if left<=right:
-        for d in range(bottom,top-1,-1):
-            matrix[d][left] = values
-        left += 1
-#   values += 1
-#for row in matrix:
-#    print(*row)
-
-
-
-#---------------------------------------------------------------
-#01
-n = int(input())
-if n>=0:
-    n = bin(n)[2:].zfill(16)
-    print(n)
-else:
-    n = abs(n)
-    n = list(bin(n)[2:].zfill(15))
-    for i in range(len(n)):
-        if n[i]=='0':
-            n[i]='1'
-        else:
-            n[i]='0'
-    ans = int('1'+''.join(n),2)+1
-    print(bin(ans)[2:])
-#-----------------------------------------------------------------
-
-
-
-#02
-def is_h_number(x):
-    return x%4==1
-def is_h_prime(x):
-    if x<=1:
-        return False
-    if not is_h_prime(x):
-        return False
-    for i in range(2,int(x**0.5)+1):
-        if x%i==0:
-            return False
-    return True
-h_primes = []
-for num in range(1,150):
-    if is_h_prime(num):
-        h_primes.append(num)
-ans = []
-for i in range(len(h_primes)):
-    for j in range(i,len(h_primes)):
-        products = h_primes[i] * h_primes[j]
-        if products < 150:
-            ans.append((products,h_primes[i],h_primes[j]))
-        else:
-            break
-ans.sort()
-for items in ans:
-    print(f"{items[0]}={items[1]*items[2]}")
-#------------------------------------------------------------------
-
-
-
-#03
-n = input().strip()
+x = input().strip()
 count = 0
 while True:
-    n = n.zfill(4)
-    big = int("".join(sorted(n,reverse=True)))
-    small = int("".joni(sorted(n)))
+    x = x.zfill(4)
+    big = int("".join(sorted(x,reverse=True)))
+    small = int("".join(sorted(x)))
     diff = big-small
-    count+=1
-    if diff==6174:
+    count += 1
+    if diff == 6174:
         print(count)
         break
-    n = str(diff)
+    x = str(diff)
 #--------------------------------------------------------------------
 
 
@@ -211,26 +302,37 @@ date_str = input().strip()
 current_date = datetime.strptime(date_str,"%Y%m%d")
 while True:
     current_date += timedelta(days=1)
-    s = current_date.strftime(current_date,"%Y%m%d")
+    s = current_date.strftime("%Y%m%d")
     if s == s[::-1]:
         print(s)
         break
-#----------------------------------------------------------------------
+#--------------------------------------------------------------------
 
 
 
 #05
 n = int(input())
-matrix = [[0]*n-1 for _ in range(n-1)]
-for layer in range((n//2)):
-    values = layer+1
-    for a in range(layer,n-1-layer):
-        matrix[layer][a] = values
-    for b in range(layer,n-1-layer):
-        matrix[n-1-layer-1,b] = values
-    for c in range(layer,n-1-layer):
-        matrix[c][layer] = values
-    for d in range(layer,n-1-layer):
-        matrix[d][n-1-layer] = values
-    for row in matrix:
-        print(*row)
+matrix = [[0]*n-1 for _ in range(n)]
+left = 0
+right = n-2
+top = 0
+bottom = n-2
+values = 1
+while left <= right and top <= bottom:
+    for a in range(left,right+1):
+        matrix[top][a] = values
+    top += 1
+    for b in range(top,bottom+1):
+        matrix[b][right] = values
+    right -= 1
+    if top <= bottom:
+        for c in range(right,left-1,-1):
+            matrix[bottom][c] = values
+        bottom -= 1
+    if left <= right:
+        for d in range(bottom,top-1,-1):
+            matrix[d][left] = values
+        left += 1
+    values += 1
+for row in matrix:
+    print(*row)

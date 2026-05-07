@@ -1,158 +1,291 @@
-#01
-L,R = map(int,input().split())
-def is_prime(x):
-    if x<2:
-        return False
-    for i in range(2,int(x**0.5)+1):
-        if x % i == 0:
-            return False
-    return True
-def is_pureprime(x):
-    if not is_prime(x):
-        return False
-    s=str(x)
-    for i in range(len(s)):
-        x=s[i:]#x = int(s[i:])
-        if is_prime(x):#if not is_prime(x)
-            return False
-    return True
-for i in range(L,R+1):
-    if is_pureprime(i):
-        print(i)
-#------------------------------------------------
+# #01
+# L,R = map(int,input().split())
+# def is_prime(x):
+#     if x<2:
+#         return False
+#     for i in range(2,int(x**0.5)+1):
+#         if x % i == 0:
+#             return False
+#     return True
+# def is_pureprime(x):
+#     if not is_prime(x):
+#         return False
+#     s=str(x)
+#     for i in range(len(s)):
+#         x=s[i:]#x = int(s[i:])
+#         if is_prime(x):#if not is_prime(x)
+#             return False
+#     return True
+# for i in range(L,R+1):
+#     if is_pureprime(i):
+#         print(i)
+# #------------------------------------------------
 
 
 
-#02
-x,base = map(int,input().split())#读入的是十进制浮点数
-#x = input.strip()
-#base=int(input())
-digits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-def convert_int(x,n):
-    if x==0:
-        return "0"
-    res=[]
-    while x>0:
-        res.append(digits[x%n])
-        x //= n
-    return "".join(res[::-1])
-#---------------------------------------------------------------
-def convert_little(x,n):
-    if x == 0:
-        return "0"
-    res=[]
-    while x>0:
-        res.append(int(x))
-        x *= n
-        x -= int(x)
-    return "".join(res)
-#-------------------------修改------------------------------------
-# def convert_little(x,n,precision=8):
+# #02
+# x,base = map(int,input().split())#读入的是十进制浮点数
+# #x = input.strip()
+# #base=int(input())
+# digits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+# def convert_int(x,n):
+#     if x==0:
+#         return "0"
+#     res=[]
+#     while x>0:
+#         res.append(digits[x%n])
+#         x //= n
+#     return "".join(res[::-1])
+# #---------------------------------------------------------------
+# def convert_little(x,n):
+#     if x == 0:
+#         return "0"
+#     res=[]
+#     while x>0:
+#         res.append(int(x))
+#         x *= n
+#         x -= int(x)
+#     return "".join(res)
+# #-------------------------修改------------------------------------
+# # def convert_little(x,n,precision=8):
+# #     if x == "":
+# #         return ""
+# #     numerator = int(x)
+# #     demoninator = 10**len(x)
+# #     res=[]
+# #     for _ in range(precision):
+# #         if numerator == 0:
+# #             break
+# #         numerator *= base
+# #         res.append(digits[numerator//demoninator])
+# #         numerator %= demoninator
+# #         return "".join(res)
+# #----------------------------------------------------------------
+# x=str(x)#一直就是字符串
+# if ".".find(x):#if "." in x:
+#     int1,little1 = map(x.split("."))#直接切就行int1,little1 = x.split(".")
+# #else:
+# #    int1 = x
+# #    little1 = ""
+# intpart = convert_int(int1,base)#intpart = convert_int(int(int1),base)
+# littlepart = convert_little(little1,base,precision=8)
+# #if little1 = "":
+# #    print(intpart)
+# #else:
+# #    print(intpart+"."+littlepart)
+# print(intpart + littlepart)
+# #---------------------------------------------------------
+
+
+
+# #03
+# n = int(input())
+# students=[]
+# for _ in range(n):
+#     name,number,score = map(str,input().split())
+#     number,score = float(number,score)
+#     students.append((name,number,score))
+# students.sort(lambda x : (-x[2],x[1]))#students.sort(key=lambda x :(-x[2],x[1]))
+# for i in range(len(students)):
+#     print(students[i])
+# #--------------------------------------------------------------
+
+
+
+# #04
+# from datetime import date,timedelta
+# #----------------------------------------------------
+# start,end = map(str,input().split())
+# start = date.strptime(start,"%Y%m%d")
+# end = date.strptime(end,"%Y%m%d")
+# #---------------------修改--------------------------------
+# # start_year,start_month,start_day = map(int,input().split())
+# # end_year,end_month,end_day = map(int,input().split())
+# # start = date(start_year,start_month,start_day)
+# # end = date(end_year,end_month,end_day)
+# #-----------------------------------------------------------
+# diff = end-start#diff = (end-start).days
+# if 0 < diff%5 <=3:#if diff%5 <3:因为不包括第一天
+#     print("打鱼")
+# else:
+#     print("晒网")
+# #------------------------------------------------------------
+
+
+
+# #05
+# m,n = map(int,input().split())
+# #-------------------------------------------
+# matrix=[[0]*n for _ in range(m)]
+# for i in range(m):
+#     for j in range(n):
+#         matrix[i][j] = input()
+# #--------------修改----------------------------
+# # matrix = []
+# # for _ in range(m):
+# #     row = list(map(int,input().split()))
+# #     matrix.append(row)
+# #----------------------------------------------
+# left = 0
+# right = n-1
+# top = 0
+# bottom = m-1
+# res=[]
+# while left<=right and top<=bottom:
+#     for a in range(left,right+1):
+#         res.append(matrix[top][a])
+#     top+=1
+#     for b in range(top,bottom+1):
+#         res.append(matrix[b][right])
+#     right-=1
+#     if top<=bottom:
+#         for c in range(right,left-1,-1):
+#             res.append(matrix[bottom][c])
+#         bottom-=1
+#     if left<=right:
+#         for d in range(bottom,top-1,-1):
+#             res.append(matrix[d][left])
+#         left+=1
+# print(*res)
+# #------------------------------------------------------------
+
+
+
+# #01
+# L,R = map(int,input().split())
+# def is_prime(x):
+#     if x<2:
+#         return False
+#     for i in range(2,int(x**0.5)+1):
+#         if x%i == 0:
+#             return False
+#     return True
+# def is_pure_prime(x):
+#     s = str(x)
+#     for i in range(len(s)):
+#         x = int(s[i:])
+#         if not is_prime(x):
+#             return False
+#     return True
+# for num in range(L,R+1):
+#     if is_pure_prime(num):
+#         print(num)
+# #---------------------------------------------------------------
+
+
+
+# #02
+# digits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+# num_str = input().strip()
+# base = int(input())
+# precision = 10
+# def convert_int(n,base):
+#     if n == 0:
+#         return "0"
+#     res = []
+#     while n > 0:
+#         res.append(digits[n % base])
+#         n //= base
+#     res.reverse()
+#     return "".join(res)
+# def convert_little(x,base,precision):
 #     if x == "":
 #         return ""
 #     numerator = int(x)
-#     demoninator = 10**len(x)
-#     res=[]
+#     denominator = 10**len(x)
+#     res = []
 #     for _ in range(precision):
 #         if numerator == 0:
 #             break
 #         numerator *= base
-#         res.append(digits[numerator//demoninator])
-#         numerator %= demoninator
-#         return "".join(res)
-#----------------------------------------------------------------
-x=str(x)#一直就是字符串
-if ".".find(x):#if "." in x:
-    int1,little1 = map(x.split("."))#直接切就行int1,little1 = x.split(".")
-#else:
-#    int1 = x
-#    little1 = ""
-intpart = convert_int(int1,base)#intpart = convert_int(int(int1),base)
-littlepart = convert_little(little1,base,precision=8)
-#if little1 = "":
-#    print(intpart)
-#else:
-#    print(intpart+"."+littlepart)
-print(intpart + littlepart)
-#---------------------------------------------------------
+#         res.append(digits[numerator//denominator])
+#         numerator %= denominator
+#     return "".join(res)
+# if "." in num_str:
+#     int1,little1 = num_str.split(".")
+# else:
+#     int1 = num_str
+#     little1 = ""
+# int_part = int(int1)
+# int_res = convert_int(int_part,base)
+# little_res = convert_little(little1,base,precision)
+# if little_res == "":
+#     print(int_res)
+# else:
+#     print(int_res + "." + little_res)
+# #---------------------------------------------------------------------------
 
 
 
-#03
-n = int(input())
-students=[]
-for _ in range(n):
-    name,number,score = map(str,input().split())
-    number,score = float(number,score)
-    students.append((name,number,score))
-students.sort(lambda x : (-x[2],x[1]))#students.sort(key=lambda x :(-x[2],x[1]))
-for i in range(len(students)):
-    print(students[i])
-#--------------------------------------------------------------
+# #03
+# n = int(input())
+# students = []
+# for _ in range(n):
+#     student_id,name,score = input().split()
+#     id,score = float(id),float(score)
+#     students.append([student_id,name,score])
+# students.sort(key=lambda x: (-x[2],x[0]))
+# id_width = max(len("学号"),max(len(s[0]) for s in students))
+# name_width = max(len("姓名"),max(len(s[1]) for s in students))
+# score_width = max(len("成绩"),max(len(f"{s[2]:.2f}")for s in students))
+# print(f"{'排名':<4}{'学号':<{id_width}}{'姓名':<{name_width}}{'成绩':>{score_width}}")
+# print("-"*(10+id_width+name_width+score_width))
+# for i in range(len(students)):
+#     rank = i+1
+#     student_id = students[i][0]
+#     name = students[i][1]
+#     score = students[i][2]
+#     print(f"{rank:<4}{student_id:<{id_width}}{name:<{name_width}}{score:>{score_width}.2f}")
+# #简化版
+# n = int(input())
+# students=[]
+# for _ in range(n):
+#     name,number,score = map(str,input().split())
+#     number,score = float(number,score)
+#     students.append((name,number,score))
+# students.sort(key=lambda x :(-x[2],x[1]))
+# for i in range(len(students)):
+#     print(students[i])
+# #-----------------------------------------------------------------------------------
 
 
 
-#04
-from datetime import date,timedelta
-#----------------------------------------------------
-start,end = map(str,input().split())
-start = date.strptime(start,"%Y%m%d")
-end = date.strptime(end,"%Y%m%d")
-#---------------------修改--------------------------------
+# #04
+# from datetime import date,timedelta
 # start_year,start_month,start_day = map(int,input().split())
-# end_year,end_month,end_day = map(int,input().split())
-# start = date(start_year,start_month,start_day)
-# end = date(end_year,end_month,end_day)
-#-----------------------------------------------------------
-diff = end-start#diff = (end-start).days
-if 0 < diff%5 <=3:#if diff%5 <3:因为不包括第一天
-    print("打鱼")
-else:
-    print("晒网")
-#------------------------------------------------------------
+# target_year,target_month,target_day = map(int,input().split())
+# start_date = date(start_year,start_month,start_day)
+# target_date = date(target_year,target_month,target_day)
+# days = (target_date-start_date).days
+# position = days%5
+# if position < 3:
+#     print("打鱼")
+# else:
+#     print("晒网")
 
 
 
-#05
-m,n = map(int,input().split())
-#-------------------------------------------
-matrix=[[0]*n for _ in range(m)]
-for i in range(m):
-    for j in range(n):
-        matrix[i][j] = input()
-#--------------修改----------------------------
-# matrix = []
-# for _ in range(m):
-#     row = list(map(int,input().split()))
-#     matrix.append(row)
-#----------------------------------------------
-left = 0
-right = n-1
-top = 0
-bottom = m-1
-res=[]
-while left<=right and top<=bottom:
-    for a in range(left,right+1):
-        res.append(matrix[top][a])
-    top+=1
-    for b in range(top,bottom+1):
-        res.append(matrix[b][right])
-    right-=1
-    if top<=bottom:
-        for c in range(right,left-1,-1):
-            res.append(matrix[bottom][c])
-        bottom-=1
-    if left<=right:
-        for d in range(bottom,top-1,-1):
-            res.append(matrix[d][left])
-        left+=1
-print(*res)
-#------------------------------------------------------------
+
+
+
+
+# from datetime import datetime,timedelta
+# start_date = input().strip()
+# target_date = input().strip()
+# start = datetime.strptime(start_date,"%Y%m%d")
+# target = datetime.strptime(target_date,"%Y%m%d")
+# days = (target - start).days
+# position = days%5
+# if position < 3:
+#     print("打鱼")
+# else:
+#     print("晒网")
+#--------------------------------------------------------------------------------
 
 
 
 #01
-L,R = map(int,input().split())
+l,r = map(int,input().split())
 def is_prime(x):
     if x<2:
         return False
@@ -162,58 +295,59 @@ def is_prime(x):
     return True
 def is_pure_prime(x):
     s = str(x)
-    for i in range(len(s)):
+    for i in range(len(s)-1):
         x = int(s[i:])
         if not is_prime(x):
             return False
     return True
-for num in range(L,R+1):
-    if is_pure_prime(num):
-        print(num)
-#---------------------------------------------------------------
+for i in range(l,r+1):
+    if is_pure_prime(i):
+        print(i)
+#---------------------------------------------------------------------
 
 
 
 #02
 digits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-num_str = input().strip()
+x = input().strip()
 base = int(input())
 precision = 10
-def convert_int(n,base):
-    if n == 0:
+def convert_int(x,n):
+    if x == 0:
         return "0"
     res = []
-    while n > 0:
-        res.append(digits[n % base])
-        n //= base
-    res.reverse()
-    return "".join(res)
-def convert_little(x,base,precision):
+    while x > 0:
+        res.append(digits[x%n])
+        x //= n
+    return "".join(res[::-1])
+def convert_little(x,n,precision):
     if x == "":
         return ""
-    numerator = int(x)
-    denominator = 10**len(x)
     res = []
+    numerator = int(x)
+    denominator = 10**len(numerator)
+    ans = numerator // denominator
     for _ in range(precision):
         if numerator == 0:
             break
-        numerator *= base
+
+        numeraor *= n
         res.append(digits[numerator//denominator])
         numerator %= denominator
     return "".join(res)
-if "." in num_str:
-    int1,little1 = num_str.split(".")
+if "." in x:
+    int1,little1 = x.split(".")
 else:
-    int1 = num_str
+    int1 = int(x)
     little1 = ""
-int_part = int(int1)
-int_res = convert_int(int_part,base)
-little_res = convert_little(little1,base,precision)
-if little_res == "":
-    print(int_res)
+int_part = convert_int(int1,base)
+little_part = convert_little(little1,base)
+if little_part == "":
+    print(int_part)
 else:
-    print(int_res + "." + little_res)
-#---------------------------------------------------------------------------
+    print(int_part + "." + little_part)
+#----------------------------------------------------------------
+
 
 
 
@@ -221,62 +355,55 @@ else:
 n = int(input())
 students = []
 for _ in range(n):
-    student_id,name,score = input().split()
-    id,score = float(id),float(score)
-    students.append([student_id,name,score])
+    student_id,name,score = map(str,input().split())
+    score = float(score)
+    students.append(student_id,name,score)
 students.sort(key=lambda x: (-x[2],x[0]))
-id_width = max(len("学号"),max(len(s[0]) for s in students))
-name_width = max(len("姓名"),max(len(s[1]) for s in students))
-score_width = max(len("成绩"),max(len(f"{s[2]:.2f}")for s in students))
-print(f"{'排名':<4}{'学号':<{id_width}}{'姓名':<{name_width}}{'成绩':>{score_width}}")
-print("-"*(10+id_width+name_width+score_width))
 for i in range(len(students)):
-    rank = i+1
-    student_id = students[i][0]
-    name = students[i][1]
-    score = students[i][2]
-    print(f"{rank:<4}{student_id:<{id_width}}{name:<{name_width}}{score:>{score_width}.2f}")
-#简化版
-n = int(input())
-students=[]
-for _ in range(n):
-    name,number,score = map(str,input().split())
-    number,score = float(number,score)
-    students.append((name,number,score))
-students.sort(key=lambda x :(-x[2],x[1]))
-for i in range(len(students)):
-    print(students[i])
-#-----------------------------------------------------------------------------------
+    print(*students[i])
+#------------------------------------------------------------------
 
 
 
 #04
 from datetime import date,timedelta
 start_year,start_month,start_day = map(int,input().split())
-target_year,target_month,target_day = map(int,input().split())
+end_year,end_month,end_day = map(int,input().split())
 start_date = date(start_year,start_month,start_day)
-target_date = date(target_year,target_month,target_day)
-days = (target_date-start_date).days
-position = days%5
-if position < 3:
+end_date = date(end_year,end_month,end_day)
+diff = (end_date-start_date).day
+if diff % 5 < 3:
     print("打鱼")
 else:
     print("晒网")
+#-----------------------------------------------------------------
 
 
 
-
-
-
-
-from datetime import datetime,timedelta
-start_date = input().strip()
-target_date = input().strip()
-start = datetime.strptime(start_date,"%Y%m%d")
-target = datetime.strptime(target_date,"%Y%m%d")
-days = (target - start).days
-position = days%5
-if position < 3:
-    print("打鱼")
-else:
-    print("晒网")
+#05
+m,n = map(int,input().split())
+matrix = []
+for _ in range(m):
+    row = list(map(int,input().split()))
+    matrix.append(row)
+top = 0
+bottom = m-1
+left = 0
+right = n-1
+ans = []
+while top<=bottom and left<=right:
+    for a in range(left,right+1):
+        ans.append(matrix[top][a])
+    top += 1
+    for b in range(top,bottom+1):
+        ans.append(matrix[b][right])
+    right -=1
+    if top <= bottom:
+        for c in range(right,left-1,-1):
+            ans.append(matrix[bottom][c])
+        bottom -= 1
+    if left <= right:
+        for d in range(bottom,top-1,-1):
+            ans.append(matrix[d][left])
+        left += 1
+print(*ans)

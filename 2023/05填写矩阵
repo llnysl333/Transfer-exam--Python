@@ -42,7 +42,7 @@ for layer in range((n//2)):
 #         print(*row)
 #法二
 # n = int(input())
-# matrix = [[0]*(n-1) for _ in range(n-1)]
+# matrix = [[0]*(n-1) for _ in range(n)]
 # left = 0
 # right = n-2
 # top = 0

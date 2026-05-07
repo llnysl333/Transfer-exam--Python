@@ -4,14 +4,13 @@ parts = []
 for i in range(0,len(s),n):
     parts.append(s[i:i+n])
 result = []
-for i in range(len(parts)):
-    part = parts[i]
+for part in parts:
     move = i % len(part)
     if move == 0:
-        result.append(part)
+        new_part = part
     else:
         new_part = part[-move:]+part[:-move]
-        result.append(new_part)
+    result.append(new_part)
 print("".join(result))   
 #先将字符串按照长度n进行拆分
 #第i个部分需要移动i%n位
